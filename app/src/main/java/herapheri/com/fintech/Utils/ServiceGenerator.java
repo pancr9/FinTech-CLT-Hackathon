@@ -25,7 +25,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * @author Rekhansh Panchal (rpanchal@uncc.edu)
  */
 
-class ServiceGenerator {
+public class ServiceGenerator {
 
     private static final String BASE_URL = "https://www";
 
@@ -40,8 +40,7 @@ class ServiceGenerator {
                     Request original = chain.request();
 
                     Request request = original.newBuilder()
-                            .header("Authorization", "Bearer " // +Get the authentication token.
-                            )
+                            .header("Authorization", "Bearer " + SessionGlobals.getAuthToken())
                             .method(original.method(), original.body())
                             .build();
 

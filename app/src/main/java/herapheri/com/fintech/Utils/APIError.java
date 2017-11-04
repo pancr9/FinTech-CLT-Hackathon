@@ -9,12 +9,12 @@ import android.util.Log;
  * @author Rekhansh Panchal (rpanchal@uncc.edu)
  */
 
-class APIError {
+public class APIError {
 
     private int statusCode;
     private String message;
 
-    APIError() {
+    public APIError() {
     }
 
     public int getStatusCode() {
