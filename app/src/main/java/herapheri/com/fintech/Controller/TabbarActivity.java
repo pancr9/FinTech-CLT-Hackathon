@@ -92,13 +92,13 @@ public class TabbarActivity extends FragmentActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 mViewPager.setCurrentItem(tab.getPosition());
-                if(tab.getPosition() == 0 || tab.getPosition() == 1){
-                    tabLayout.setSelectedTabIndicatorColor(Color.BLUE);
-                }
-                else{
-                    tabLayout.setSelectedTabIndicatorColor(Color.TRANSPARENT);
+               // if(tab.getPosition() == 0 || tab.getPosition() == 1){
+                    tabLayout.setSelectedTabIndicatorColor(Color.WHITE);
+              //  }
+              //  else{
+                    //tabLayout.setSelectedTabIndicatorColor(Color.TRANSPARENT);
 
-                }
+              //  }
             }
 
             @Override
@@ -124,7 +124,11 @@ public class TabbarActivity extends FragmentActivity {
                 tabLayout.getTabAt(1).setText("Requests");
             }
             if(i == 2){
-                tabLayout.getTabAt(2).setText("Account");
+                tabLayout.getTabAt(2).setText("Networth");
+
+            }
+            if(i == 3){
+                tabLayout.getTabAt(3).setText("Account");
             }
             //if(i == 2){
             //tabLayout.getTabAt(2).setIcon(R.drawable.accountios2);
@@ -165,6 +169,13 @@ public class TabbarActivity extends FragmentActivity {
                 return fragment;
             }
             else if(i == 2){
+                Fragment fragment = new UserFragment();
+                Bundle args = new Bundle();
+                // Our object is just an integer :-P
+                fragment.setArguments(args);
+                return fragment;
+            }
+            else if(i == 3){
                 Fragment fragment = new AccountFragment();
                 Bundle args = new Bundle();
                 // Our object is just an integer :-P
@@ -178,7 +189,7 @@ public class TabbarActivity extends FragmentActivity {
 
         @Override
         public int getCount() {
-            return 3;
+            return 4;
         }
 
 
