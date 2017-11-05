@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import herapheri.com.fintech.R;
 
 /**
@@ -17,6 +19,7 @@ public class PostActivity extends AppCompatActivity {
     TextView name;
     TextView cost;
     TextView desc;
+    String imagePath;
     ImageView img;
 
     @Override
@@ -30,6 +33,14 @@ public class PostActivity extends AppCompatActivity {
         name.setText(getIntent().getStringExtra("name"));
         cost.setText(getIntent().getStringExtra("cost"));
         desc.setText(getIntent().getStringExtra("desc"));
+        imagePath = getIntent().getStringExtra("imgpath");
+        img = (ImageView) findViewById(R.id.postimg);
+        if (imagePath != null && imagePath.length() > 0) {
+            Picasso.with(this).load(imagePath)
+                    .placeholder(R.drawable.ic_action_name)
+                    .into(img);
+        }
+
 
     }
 }

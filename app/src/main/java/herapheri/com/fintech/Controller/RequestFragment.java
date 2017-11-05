@@ -32,14 +32,14 @@ public class RequestFragment extends Fragment {
         ListView rv = (ListView) v.findViewById(R.id.rve);
         ArrayList<Request> items = new ArrayList<>();
         Request item = new Request();
-        item.setCostPerHour("3.00$");
-        item.setName("Mohamed");
+        item.setCostPerHour("3123.00$");
+        item.setName("Truck");
         item.setStatus("Approved");
 
         items.add(item);
         items.add(item);
         items.add(item);
-        item.setStatus("Declined");
+        //item.setStatus("Declined");
         items.add(item);
         //item.setStatus("Pending");
         items.add(item);

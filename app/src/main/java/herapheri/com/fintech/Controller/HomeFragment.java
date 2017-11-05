@@ -118,6 +118,7 @@ public class HomeFragment extends Fragment {
                     ii.putExtra("name",items.get(i).getName());
                     ii.putExtra("cost",items.get(i).getCostPerHour());
                     ii.putExtra("desc",items.get(i).getItemDescription());
+                    ii.putExtra("path",items.get(i).getImgPath());
                     startActivity(ii);
                 }
             });
