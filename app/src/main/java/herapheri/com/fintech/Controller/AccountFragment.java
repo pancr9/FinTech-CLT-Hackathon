@@ -87,7 +87,6 @@ public class AccountFragment extends Fragment {
         Money m = new Money();
         m.setAmount("450,000.00$");
         m.setCurrency("USD");
-
         networth.setAsset(m);
         Date d = new Date();
         networth.setDate(d);

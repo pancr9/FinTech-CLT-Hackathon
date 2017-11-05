@@ -1,13 +1,11 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/action_refresh"
+        android:id="@+id/action_exit"
         android:orderInCategory="100"
-        android:icon="@drawable/ic_action_name"
+        android:icon="@drawable/exit2"
+        app:showAsAction="ifRoom"
         android:title="Refresh"/>
-    <item
-        android:id="@+id/action_settings"
-        android:title="Settings">
-    </item>
 
 </menu>
