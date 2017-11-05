@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "454988682508",
+    "firebase_url": "https://fintech-b7e6e.firebaseio.com",
+    "project_id": "fintech-b7e6e",
+    "storage_bucket": "fintech-b7e6e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:454988682508:android:cc718926d3a5b55c",
+        "android_client_info": {
+          "package_name": "herapheri.com.fintech.Controller"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "454988682508-fcc9j53q0t0udi7g92dtamrdrtis89eu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmNzTE8G18AfdKM-V0R4fQ-dg7zIraucE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

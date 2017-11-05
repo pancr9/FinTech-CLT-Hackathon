@@ -11,7 +11,11 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Toast;
 
 import herapheri.com.fintech.R;
 
@@ -46,7 +50,6 @@ public class TabbarActivity extends FragmentActivity {
 //        tabHost.addTab(tabHost.newTabSpec("Same Room").setIndicator("Same Room"),LocalFragment.class,null);
 //        tabHost.addTab(tabHost.newTabSpec("Settings").setIndicator("Settings"),SettingsFragment.class,null);
         setUpTablayout();
-
         //rv.setHasFixedSize(true);
         //LinearLayoutManager llm = new LinearLayoutManager(this);
         //rv.setLayoutManager(llm);
@@ -121,17 +124,17 @@ public class TabbarActivity extends FragmentActivity {
             }
             if(i == 1){
                // tabLayout.getTabAt(1).setIcon(R.drawable.settings);
-                tabLayout.getTabAt(1).setText("My Requests");
+                tabLayout.getTabAt(1).setText("Requests");
             }
             if(i == 2){
                 tabLayout.getTabAt(2).setText("Account");
 
             }
-            //if(i == 2){
+            if(i == 3){
             //tabLayout.getTabAt(2).setIcon(R.drawable.accountios2);
-            //  tabLayout.getTabAt(2).setText("Account");
+              tabLayout.getTabAt(3).setText("Lend");
 
-//            }
+            }
             mViewPager.setCurrentItem(0);
         }
     }
@@ -172,6 +175,13 @@ public class TabbarActivity extends FragmentActivity {
                 fragment.setArguments(args);
                 return fragment;
             }
+            else if(i == 3){
+                Fragment fragment = new LenderFragment();
+                Bundle args = new Bundle();
+                // Our object is just an integer :-P
+                fragment.setArguments(args);
+                return fragment;
+            }
 
 
             return null;
@@ -180,10 +190,37 @@ public class TabbarActivity extends FragmentActivity {
 
         @Override
         public int getCount() {
-            return 3;
+            return 4;
         }
 
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // action with ID action_refresh was selected
+            case R.id.action_refresh:
+                Toast.makeText(this, "Refresh selected", Toast.LENGTH_SHORT)
+                        .show();
+                break;
+            // action with ID action_settings was selected
+            case R.id.action_settings:
+                Toast.makeText(this, "Settings selected", Toast.LENGTH_SHORT)
+                        .show();
+                break;
+            default:
+                break;
+        }
+
+        return true;
     }
 }
 
