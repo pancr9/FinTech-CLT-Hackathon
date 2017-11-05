@@ -1,8 +1,10 @@
 package herapheri.com.fintech.Controller;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -11,6 +13,8 @@ import android.widget.Button;
 import herapheri.com.fintech.Model.Cobrand;
 import herapheri.com.fintech.Model.User;
 import herapheri.com.fintech.R;
+import herapheri.com.fintech.Utils.APIError;
+import herapheri.com.fintech.Utils.ErrorUtils;
 import herapheri.com.fintech.Utils.RetrofitAPI;
 import herapheri.com.fintech.Utils.ServiceGenerator;
 import herapheri.com.fintech.Utils.SessionGlobals;
@@ -48,7 +52,8 @@ public class MainActivity extends AppCompatActivity {
                     SessionGlobals.setCobSession(cobrand.getSession().getCobSession());
 
 
-                }
+                } else
+                    displayError(response);
             }
 
             @Override
@@ -97,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
 
                     Intent i = new Intent(MainActivity.this, TabbarActivity.class);
                     startActivity(i);
-                }
+                } else displayError(response);
             }
 
             @Override
@@ -107,6 +112,30 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+
+    /**
+     * Function to parse the response body and display alert dialog box.
+     *
+     * @param response Response received from the server.
+     */
+    private void displayError(Response response) {
+
+        // Parse the response body
+        APIError error = ErrorUtils.parseError(response);
+
+        new AlertDialog.Builder(this)
+                .setTitle("Error")
+                .setMessage(error.getMessage())
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        //Do nothing.
+                    }
+                })
+                .show();
     }
 }
 

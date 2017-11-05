@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://C:\Users\codyj\Documents\FinTech\FinTech-CLT-Hackathon\FinTech.iml" filepath="C:\Users\codyj\Documents\FinTech\FinTech-CLT-Hackathon\FinTech.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../../codyj/Documents/FinTech/FinTech-CLT-Hackathon/FinTech.iml" filepath="$PROJECT_DIR$/../../../../codyj/Documents/FinTech/FinTech-CLT-Hackathon/FinTech.iml" />
       <module fileurl="file://$PROJECT_DIR$/FinTech-CLT-Hackathon.iml" filepath="$PROJECT_DIR$/FinTech-CLT-Hackathon.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
