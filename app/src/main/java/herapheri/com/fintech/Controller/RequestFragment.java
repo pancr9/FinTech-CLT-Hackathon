@@ -10,7 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -128,23 +128,23 @@ public class RequestFragment extends Fragment {
                 TextView name = (TextView) convertView.findViewById(R.id.name_request);
                 TextView status = (TextView) convertView.findViewById(R.id.status_request);
                 TextView cost = (TextView) convertView.findViewById(R.id.cost_request);
-                ImageView result = (ImageView) convertView.findViewById(R.id.result);
+                Button result = (Button) convertView.findViewById(R.id.result);
                 name.setText("Item: "+s.get(position).getName());
                 cost.setText("Cost per day: "+s.get(position).getCostPerHour());
                 status.setText("Status "+s.get(position).getStatus());
                 CardView cardView = (CardView) convertView.findViewById(R.id.cardView);
                 if(s.get(position).getStatus().equals("Approved")){
                 //cardView.setCardBackgroundColor(Color.parseColor("#009900"));
-                    result.setBackground(getResources().getDrawable(R.drawable.accepted));
+                    result.setBackground(getResources().getDrawable(R.drawable.shape_accepted));
                 }
                 else if(s.get(position).getStatus().equals("Pending")){
                     //cardView.setCardBackgroundColor(Color.parseColor("#999999"));
-                    result.setBackground(getResources().getDrawable(R.drawable.pending));
+                    result.setBackground(getResources().getDrawable(R.drawable.shape_pending));
 
                 }
                 else if(s.get(position).getStatus().equals("Declined")){
                     //cardView.setCardBackgroundColor(Color.parseColor("#FF0000"));
-                    result.setBackground(getResources().getDrawable(R.drawable.declined));
+                    result.setBackground(getResources().getDrawable(R.drawable.shape_declined));
 
 
                 }
