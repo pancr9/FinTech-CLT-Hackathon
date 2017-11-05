@@ -51,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
                     //Set cob-session.
                     SessionGlobals.setCobSession(cobrand.getSession().getCobSession());
 
-
                 } else
                     displayError(response);
             }
