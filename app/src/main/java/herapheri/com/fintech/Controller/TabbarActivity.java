@@ -121,7 +121,7 @@ public class TabbarActivity extends FragmentActivity {
             }
             if(i == 1){
                // tabLayout.getTabAt(1).setIcon(R.drawable.settings);
-                tabLayout.getTabAt(1).setText("Requests");
+                tabLayout.getTabAt(1).setText("My Requests");
             }
             if(i == 2){
                 tabLayout.getTabAt(2).setText("Account");

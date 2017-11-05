@@ -24,16 +24,17 @@ import herapheri.com.fintech.R;
  */
 
 public class HomeFragment extends Fragment {
-
+    Item item;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_home,container,false);
-        RecyclerView rv = (RecyclerView)v.findViewById(R.id.rv);
+        View v = inflater.inflate(R.layout.fragment_home, container, false);
+        RecyclerView rv = (RecyclerView) v.findViewById(R.id.rv);
         ArrayList<Item> items = new ArrayList<>();
-        Item item = new Item();
+        item = new Item();
         item.setPricePerday(3.05F);
         item.setName("Tractor Trailer");
+        //item.setLocation();
 
         items.add(item);
         items.add(item);
@@ -46,12 +47,42 @@ public class HomeFragment extends Fragment {
         //rv.setAdapter(customArrayAdapter);
         rv.setHasFixedSize(true);
         //RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(),2);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
         //gridLayoutManager.set
-            rv.setLayoutManager(gridLayoutManager);
-        CustomArrayAdapter customArrayAdapter = new CustomArrayAdapter(getActivity(),items);
+        rv.setLayoutManager(gridLayoutManager);
+        CustomArrayAdapter customArrayAdapter = new CustomArrayAdapter(getActivity(), items);
         rv.setAdapter(customArrayAdapter);
         return v;
+    }
+
+    public Double getDistanceBetweenPoints(){
+        double lat = 35.311707f;
+        double lon = -80.743051f;
+        double ilat = item.getLocation().getLatitude();
+        double ilon = item.getLocation().getLatitude();
+        return distance(lat,lon,ilat,ilon);
+
+    }
+
+    private double distance(double lat1, double lon1, double lat2, double lon2) {
+        double theta = lon1 - lon2;
+        double dist = Math.sin(deg2rad(lat1))
+                * Math.sin(deg2rad(lat2))
+                + Math.cos(deg2rad(lat1))
+                * Math.cos(deg2rad(lat2))
+                * Math.cos(deg2rad(theta));
+        dist = Math.acos(dist);
+        dist = rad2deg(dist);
+        dist = dist * 60 * 1.1515;
+        return (dist);
+    }
+
+    private double deg2rad(double deg) {
+        return (deg * Math.PI / 180.0);
+    }
+
+    private double rad2deg(double rad) {
+        return (rad * 180.0 / Math.PI);
     }
 
 
