@@ -57,6 +57,7 @@ public class PostActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(PostActivity.this,"Sending order!",Toast.LENGTH_LONG).show();
+                finish();
             }
         });
 
