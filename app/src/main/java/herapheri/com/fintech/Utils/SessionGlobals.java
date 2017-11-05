@@ -5,7 +5,7 @@ package herapheri.com.fintech.Utils;
  * Class for storing all session globals.
  */
 
-class SessionGlobals {
+public class SessionGlobals {
 
     private static String cobSession;
 

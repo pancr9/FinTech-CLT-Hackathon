@@ -1,10 +1,11 @@
 package herapheri.com.fintech.Utils;
 
+import herapheri.com.fintech.Model.Cobrand;
 import herapheri.com.fintech.Model.User;
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
@@ -20,27 +21,20 @@ public interface RetrofitAPI {
 
 
     //Call for Cobrand Login.
-    @FormUrlEncoded
-    @POST("{cobrandName}/login")
-    Call<ResponseBody> doCobrandLogin(@Field("cobrandLogin") String cobrandLogin,
-                                      @Field("cobrandPassword") String cobrandPassword,
-                                      @Path("cobrandName") String cobrandName);
+    @POST("cobrand/login")
+    Call<Cobrand> doCobrandLogin(@Body RequestBody cobrandParam);
 
     //Call for user login.
-    @FormUrlEncoded
     @POST("user/login")
-    Call<ResponseBody> doUserLogin(@Field("loginName") String loginName,
-                                   @Field("password") String password);
-
+    Call<User> doUserLogin(@Body RequestBody userParam);
 
     //Call for Logout
-    @POST("/{cobrandName}/v1/user/logout")
+    @POST("/{cobrandName}/v1/cobrand/logout")
     Call<ResponseBody> doLogOut(@Path("cobrandName") String cobrandName);
 
     //Get User.
     @GET("/{cobrandName}/v1/user")
     Call<User> getUserDetails(@Path("cobrandName") String cobrandName);
-
 
 
     /*
