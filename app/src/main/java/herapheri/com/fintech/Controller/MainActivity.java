@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
 
         RetrofitAPI retrofitAPI = ServiceGenerator.createServiceYodlee(RetrofitAPI.class, 1);
 
-        //Pre-onfigured user.
+        //Pre-configured user.
         String userName = "sbMemd308d35f2c4a8af430af782b5e93c113ca1";
         String password = "sbMemd308d35f2c4a8af430af782b5e93c113ca1#123";
 
