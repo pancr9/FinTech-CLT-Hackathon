@@ -28,7 +28,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ServiceGenerator {
 
     private static final String BASE_URL_YODLEE = "https://developer.api.yodlee.com/ysl/restserver/v1/";
-    private static final String BASE_URL_BLOCK_CHAIN = "https://www";
+    private static final String BASE_URL_YODLEE_443 = "https://developer.api.yodlee.com:443/ysl/restserver/v1/";
     private static Integer type;
 
     private static HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor()
@@ -107,15 +107,9 @@ public class ServiceGenerator {
             .baseUrl(BASE_URL_YODLEE)
             .addConverterFactory(GsonConverterFactory.create(gson));
 
-    private static Retrofit.Builder builderBlockChain = new Retrofit.Builder()
-            .baseUrl(BASE_URL_BLOCK_CHAIN)
-            .addConverterFactory(GsonConverterFactory.create(gson));
-
     private static Retrofit retrofitYodlee = builderYodlee.client(httpClientYodlee.build()).build();
 
     private static Retrofit retrofitYodleeCob = builderYodlee.client(httpClientYodleeCob.build()).build();
-
-    private static Retrofit retrofitBlockChain = builderBlockChain.client(httpClientBlockChain.build()).build();
 
     /* package */
     static Retrofit getRetrofit() {
@@ -130,11 +124,6 @@ public class ServiceGenerator {
     public static <S> S createServiceYodlee(Class<S> retrofitAPI, int serviceType) {
         type = serviceType;
         return retrofitYodlee.create(retrofitAPI);
-    }
-
-    public static <S> S createServiceBlockChain(Class<S> retrofitAPI, int serviceType) {
-        type = serviceType;
-        return retrofitBlockChain.create(retrofitAPI);
     }
 
     public static <S> S createServiceYodleeSetup(Class<S> retrofitAPI) {
