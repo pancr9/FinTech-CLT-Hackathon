@@ -102,7 +102,6 @@
                 android:layout_alignBottom="@+id/insure"
                 android:layout_marginBottom="8dp"
                 android:layout_marginEnd="16dp"
-                color
                 android:layout_toStartOf="@+id/insure"
                 android:text="Enable Tracking" />
 
