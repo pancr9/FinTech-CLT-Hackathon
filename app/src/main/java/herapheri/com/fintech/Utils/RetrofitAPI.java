@@ -1,9 +1,11 @@
 package herapheri.com.fintech.Utils;
 
+import herapheri.com.fintech.Model.User;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 
@@ -34,6 +36,11 @@ public interface RetrofitAPI {
     //Call for Logout
     @POST("/{cobrandName}/v1/user/logout")
     Call<ResponseBody> doLogOut(@Path("cobrandName") String cobrandName);
+
+    //Get User.
+    @GET("/{cobrandName}/v1/user")
+    Call<User> getUserDetails(@Path("cobrandName") String cobrandName);
+
 
 
     /*
