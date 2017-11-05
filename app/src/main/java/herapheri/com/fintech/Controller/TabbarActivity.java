@@ -124,11 +124,8 @@ public class TabbarActivity extends FragmentActivity {
                 tabLayout.getTabAt(1).setText("Requests");
             }
             if(i == 2){
-                tabLayout.getTabAt(2).setText("Networth");
+                tabLayout.getTabAt(2).setText("Account");
 
-            }
-            if(i == 3){
-                tabLayout.getTabAt(3).setText("Account");
             }
             //if(i == 2){
             //tabLayout.getTabAt(2).setIcon(R.drawable.accountios2);
@@ -169,13 +166,6 @@ public class TabbarActivity extends FragmentActivity {
                 return fragment;
             }
             else if(i == 2){
-                Fragment fragment = new UserFragment();
-                Bundle args = new Bundle();
-                // Our object is just an integer :-P
-                fragment.setArguments(args);
-                return fragment;
-            }
-            else if(i == 3){
                 Fragment fragment = new AccountFragment();
                 Bundle args = new Bundle();
                 // Our object is just an integer :-P
@@ -183,13 +173,14 @@ public class TabbarActivity extends FragmentActivity {
                 return fragment;
             }
 
+
             return null;
         }
 
 
         @Override
         public int getCount() {
-            return 4;
+            return 3;
         }
 
 

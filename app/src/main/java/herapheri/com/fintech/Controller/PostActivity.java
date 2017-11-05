@@ -37,6 +37,7 @@ public class PostActivity extends AppCompatActivity {
     ListView post_lv;
     Button purchase;
 
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
