@@ -29,6 +29,7 @@ public class ServiceGenerator {
 
     private static final String BASE_URL_YODLEE = "https://developer.api.yodlee.com/ysl/restserver/v1/";
     private static final String BASE_URL_YODLEE_443 = "https://developer.api.yodlee.com:443/ysl/restserver/v1/";
+
     private static Integer type;
 
     private static HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor()
@@ -87,6 +88,7 @@ public class ServiceGenerator {
                     Request request = original.newBuilder()
                             .header("Content-Type", "application/json")
                             .header("cache-control", "no-cache")
+                            .header("Authorization", "cobSession=" + SessionGlobals.getCobSession() + ",userSession=" + SessionGlobals.getUserSession())
                             .method(original.method(), original.body())
                             .build();
 
@@ -108,15 +110,23 @@ public class ServiceGenerator {
             .baseUrl(BASE_URL_YODLEE)
             .addConverterFactory(GsonConverterFactory.create(gson));
 
+    private static Retrofit.Builder builderYodleeAfterAuth = new Retrofit.Builder()
+            .baseUrl(BASE_URL_YODLEE_443)
+            .addConverterFactory(GsonConverterFactory.create(gson));
+
     private static Retrofit retrofitYodlee = builderYodlee.client(httpClientYodlee.build()).build();
 
     private static Retrofit retrofitYodleeCob = builderYodlee.client(httpClientYodleeCob.build()).build();
+
+    private static Retrofit retrofitYodleeAfterAuth = builderYodleeAfterAuth.client(httpClientYodleeAfterAuth.build()).build();
 
     /* package */
     static Retrofit getRetrofit() {
         switch (type) {
             case 1:
                 return retrofitYodleeCob;
+            case 2:
+                return retrofitYodleeAfterAuth;
             default:
                 return retrofitYodlee;
         }
@@ -130,5 +140,10 @@ public class ServiceGenerator {
     public static <S> S createServiceYodleeSetup(Class<S> retrofitAPI) {
 
         return retrofitYodleeCob.create(retrofitAPI);
+    }
+
+    public static <S> S createServiceYodleeAfterAuth(Class<S> retrofitAPI, int serviceType) {
+
+        return retrofitYodleeAfterAuth.create(retrofitAPI);
     }
 }

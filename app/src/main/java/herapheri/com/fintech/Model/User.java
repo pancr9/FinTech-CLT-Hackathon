@@ -17,31 +17,47 @@ public class User {
     @SerializedName("loginName")
     @Expose
     private String loginName;
-
+    @SerializedName("roleType")
+    @Expose
+    private String roleType;
     @SerializedName("email")
     @Expose
     private String email;
-
     @SerializedName("name")
     @Expose
     private Name name;
-
     @SerializedName("address")
     @Expose
     private Address address;
-
     @SerializedName("token")
     @Expose
     private String token;
-
     @SerializedName("accessTokens")
     @Expose
     private AccessTokens accessTokens;
-
+    @SerializedName("session")
+    @Expose
+    private Session session;
     /* Values from block chain. */
     @SerializedName("rating")
     @Expose
     private Float rating;
+
+    public String getRoleType() {
+        return roleType;
+    }
+
+    public void setRoleType(String roleType) {
+        this.roleType = roleType;
+    }
+
+    public Session getSession() {
+        return session;
+    }
+
+    public void setSession(Session session) {
+        this.session = session;
+    }
 
     public long getId() {
         return id;

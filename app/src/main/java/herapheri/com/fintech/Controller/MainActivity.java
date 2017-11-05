@@ -10,8 +10,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+
 import herapheri.com.fintech.Model.Cobrand;
-import herapheri.com.fintech.Model.User;
 import herapheri.com.fintech.R;
 import herapheri.com.fintech.Utils.APIError;
 import herapheri.com.fintech.Utils.ErrorUtils;
@@ -20,10 +25,16 @@ import herapheri.com.fintech.Utils.ServiceGenerator;
 import herapheri.com.fintech.Utils.SessionGlobals;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * Main Activity where the lifecycle starts.
+ *
+ * @author Rekhansh (rpanchal@uncc.edu)
+ */
 public class MainActivity extends AppCompatActivity {
     Button next;
     MediaType mediaType = MediaType.parse("application/json");
@@ -38,8 +49,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                //Pre-configured for easy login of user. For Demo purposes only.
                 String cobrandLogin = getString(R.string.Cobrand_Login);
-                String cobrandPassword = getString(R.string.CobrandPassword);
                 String pass = "3cffef4e-5209-4375-9473-c4058635a0e4";
 
                 String requestBody = "{" +
@@ -95,22 +106,86 @@ public class MainActivity extends AppCompatActivity {
                 "}";
 
         RequestBody body1 = RequestBody.create(mediaType, requestBody);
-        Call<User> userLoginCall = retrofitAPI.doUserLogin(body1);
-        userLoginCall.enqueue(new Callback<User>() {
+        Call<ResponseBody> userLoginCall = retrofitAPI.doUserLogin(body1);
+        userLoginCall.enqueue(new Callback<ResponseBody>() {
             @Override
-            public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
+            public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     Log.d("Response User ", "Successful");
-                    User user = response.body();
-                    Intent i = new Intent(MainActivity.this, TabbarActivity.class);
-                    startActivity(i);
+                    ResponseBody body = response.body();
+                    Log.d("body", body.toString());
+                    try {
+                        JSONObject jsonObject = new JSONObject(body.string());
+                        jsonObject = jsonObject.getJSONObject("user");
+                        jsonObject = jsonObject.getJSONObject("session");
+                        SessionGlobals.setUserSession(jsonObject.getString("userSession"));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    if (SessionGlobals.getUserSession() != null && SessionGlobals.getCobSession() != null)
+                        checkAccountDetails();
+
                 } else displayError(response);
             }
 
             @Override
-            public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
-
+            public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
                 Log.d("Response User ", "Failed");
+            }
+        });
+    }
+
+
+    private void checkAccountDetails() {
+
+
+        RetrofitAPI retrofitAPI = ServiceGenerator.createServiceYodleeAfterAuth(RetrofitAPI.class, 2);
+        Call<ResponseBody> accountCall = retrofitAPI.getAccounts();
+        accountCall.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    ResponseBody body = response.body();
+                    double balance = (double) 0;
+                    try {
+                        JSONObject jsonObject = new JSONObject(body.string());
+
+                        /*
+                         * Logic for accessing all the account balances of the person.
+                         */
+                        JSONArray jsonArray = jsonObject.getJSONArray("account");
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+                            jsonObject1 = jsonObject1.getJSONObject("availableBalance");
+                            balance += jsonObject1.getDouble("amount");
+                        }
+
+                        //Assumption: All balances are mentioned in USD.
+                        SessionGlobals.setTotalBalance(((float) balance));
+
+                    } catch (JSONException e) {
+                        SessionGlobals.setTotalBalance((float) 0);
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        SessionGlobals.setTotalBalance((float) 0);
+                        e.printStackTrace();
+                    }
+
+                    //Write a logic to count all balances of the person.
+                    Log.d("Account Balance is", SessionGlobals.getTotalBalance() + "");
+
+                    Intent i = new Intent(MainActivity.this, TabbarActivity.class);
+                    startActivity(i);
+
+                } else displayError(response);
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.d("Account", "Fetch failure.");
             }
         });
     }

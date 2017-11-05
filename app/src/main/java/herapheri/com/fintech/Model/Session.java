@@ -10,10 +10,20 @@ import com.google.gson.annotations.SerializedName;
 
 public class Session {
 
-
     @SerializedName("cobSession")
     @Expose
     private String cobSession;
+    @SerializedName("userSession")
+    @Expose
+    private String userSession;
+
+    public String getUserSession() {
+        return userSession;
+    }
+
+    public void setUserSession(String userSession) {
+        this.userSession = userSession;
+    }
 
     public String getCobSession() {
         return cobSession;

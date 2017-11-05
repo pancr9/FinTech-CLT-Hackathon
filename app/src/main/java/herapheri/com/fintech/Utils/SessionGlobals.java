@@ -9,9 +9,18 @@ public class SessionGlobals {
 
     private static String cobSession;
     private static String userSession;
+    private static Float totalBalance;
 
     SessionGlobals() {
 
+    }
+
+    public static Float getTotalBalance() {
+        return totalBalance;
+    }
+
+    public static void setTotalBalance(Float totalBalance) {
+        SessionGlobals.totalBalance = totalBalance;
     }
 
     public static String getUserSession() {
@@ -22,7 +31,7 @@ public class SessionGlobals {
         SessionGlobals.userSession = userSession;
     }
 
-    static String getCobSession() {
+    public static String getCobSession() {
         return cobSession;
     }
 
