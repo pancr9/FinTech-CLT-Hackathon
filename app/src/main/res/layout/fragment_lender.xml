@@ -1,6 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <FrameLayout
+        android:id="@+id/camera_preview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
 
-</android.support.constraint.ConstraintLayout>
+        <TextureView
+            android:layout_width="match_parent"
+            android:id="@+id/texture"
+            android:layout_height="match_parent" />
+
+        <Button
+            android:id="@+id/edit"
+            style="@style/AppTheme"
+            android:layout_width="40sp"
+            android:layout_height="40sp"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="16sp"
+            android:layout_marginLeft="60sp"
+            android:background="@drawable/ic_action_name" />
+
+        <Button
+            android:id="@+id/camera_btn"
+            style="@style/AppTheme"
+            android:layout_width="64sp"
+            android:layout_height="64sp"
+            android:layout_marginBottom="8sp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center|bottom"
+            android:background="@drawable/ic_action_name" />
+
+        <Button
+            android:id="@+id/gallery"
+            style="@style/AppTheme"
+            android:layout_width="40sp"
+            android:layout_height="40sp"
+            android:layout_gravity="bottom|end"
+            android:layout_marginBottom="16sp"
+            android:layout_marginRight="60sp"
+            android:background="@drawable/ic_action_name" />
+    </FrameLayout>
+
+
+
+
+</LinearLayout>
