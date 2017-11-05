@@ -1,7 +1,6 @@
 package herapheri.com.fintech.Controller;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -11,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -36,6 +36,12 @@ public class RequestFragment extends Fragment {
         item.setName("Mohamed");
         item.setStatus("Approved");
 
+        items.add(item);
+        items.add(item);
+        items.add(item);
+        item.setStatus("Declined");
+        items.add(item);
+        //item.setStatus("Pending");
         items.add(item);
         //ArrayAdapter adapter = new ArrayAdapter<String> (this,R.layout.item, items);
         CustomRequestAdapter customArrayAdapter = new CustomRequestAdapter(getActivity(), R.layout.request, items);
@@ -122,19 +128,24 @@ public class RequestFragment extends Fragment {
                 TextView name = (TextView) convertView.findViewById(R.id.name_request);
                 TextView status = (TextView) convertView.findViewById(R.id.status_request);
                 TextView cost = (TextView) convertView.findViewById(R.id.cost_request);
+                ImageView result = (ImageView) convertView.findViewById(R.id.result);
                 name.setText(s.get(position).getName());
                 cost.setText(s.get(position).getCostPerHour());
                 status.setText(s.get(position).getStatus());
                 CardView cardView = (CardView) convertView.findViewById(R.id.cardView);
                 if(s.get(position).getStatus().equals("Approved")){
-                cardView.setCardBackgroundColor(Color.parseColor("#009900"));
+                //cardView.setCardBackgroundColor(Color.parseColor("#009900"));
+                    result.setBackground(getResources().getDrawable(R.drawable.accepted));
                 }
                 else if(s.get(position).getStatus().equals("Pending")){
-                    cardView.setCardBackgroundColor(Color.parseColor("#999999"));
+                    //cardView.setCardBackgroundColor(Color.parseColor("#999999"));
+                    result.setBackground(getResources().getDrawable(R.drawable.pending));
 
                 }
                 else if(s.get(position).getStatus().equals("Declined")){
-                    cardView.setCardBackgroundColor(Color.parseColor("#FF0000"));
+                    //cardView.setCardBackgroundColor(Color.parseColor("#FF0000"));
+                    result.setBackground(getResources().getDrawable(R.drawable.declined));
+
 
                 }
                 return convertView;

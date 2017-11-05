@@ -47,7 +47,9 @@ public class HomeFragment extends Fragment {
         //rv.setAdapter(customArrayAdapter);
         rv.setHasFixedSize(true);
         //RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
-            rv.setLayoutManager(new GridLayoutManager(getActivity(),2));
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(),2);
+        //gridLayoutManager.set
+            rv.setLayoutManager(gridLayoutManager);
         CustomArrayAdapter customArrayAdapter = new CustomArrayAdapter(getActivity(),items);
         rv.setAdapter(customArrayAdapter);
         return v;
