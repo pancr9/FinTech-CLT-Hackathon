@@ -40,13 +40,13 @@ public class Item {
     @Expose
     private Integer manufactureYear;
 
-    @SerializedName("lenterId")
+    @SerializedName("lenderId")
     @Expose
-    private String lenterId;
+    private String lenderId;
 
     @SerializedName("renterId")
     @Expose
-    private String remterId;
+    private String renterId;
 
     @SerializedName("location")
     @Expose
@@ -74,7 +74,7 @@ public class Item {
 
     @SerializedName("timeReturned")
     @Expose
-    private String timeReturned;
+    private Long timeReturned;
 
     @SerializedName("currentTransactionId")
     @Expose
@@ -136,20 +136,20 @@ public class Item {
         this.manufactureYear = manufactureYear;
     }
 
-    public String getLenterId() {
-        return lenterId;
+    public String getLenderId() {
+        return lenderId;
     }
 
-    public void setLenterId(String lenterId) {
-        this.lenterId = lenterId;
+    public void setLenderId(String lenderId) {
+        this.lenderId = lenderId;
     }
 
-    public String getRemterId() {
-        return remterId;
+    public String getRenterId() {
+        return renterId;
     }
 
-    public void setRemterId(String remterId) {
-        this.remterId = remterId;
+    public void setRenterId(String renterId) {
+        this.renterId = renterId;
     }
 
     public Location getLocation() {
@@ -200,11 +200,11 @@ public class Item {
         this.timeRented = timeRented;
     }
 
-    public String getTimeReturned() {
+    public Long getTimeReturned() {
         return timeReturned;
     }
 
-    public void setTimeReturned(String timeReturned) {
+    public void setTimeReturned(Long timeReturned) {
         this.timeReturned = timeReturned;
     }
 

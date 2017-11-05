@@ -1,7 +1,5 @@
 package herapheri.com.fintech.Model;
 
-import android.location.Location;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -12,87 +10,100 @@ import com.google.gson.annotations.SerializedName;
 
 public class User {
 
-    @SerializedName("name")
-    @Expose
-    private String name;
-
     @SerializedName("id")
     @Expose
-    private String userId;
+    private long id;
 
-    @SerializedName("emailId")
+    @SerializedName("loginName")
     @Expose
-    private String emailId;
+    private String loginName;
 
-    @SerializedName("creditScore")
+    @SerializedName("email")
     @Expose
-    private Integer creditScore;
+    private String email;
 
-    @SerializedName("location")
+    @SerializedName("name")
     @Expose
-    private Location location;
+    private Name name;
 
-    @SerializedName("contactNumber")
+    @SerializedName("address")
     @Expose
-    private String contactNumber;
+    private Address address;
 
+    @SerializedName("token")
+    @Expose
+    private String token;
+
+    @SerializedName("accessTokens")
+    @Expose
+    private AccessTokens accessTokens;
+
+    /* Values from block chain. */
     @SerializedName("rating")
     @Expose
-    private String rating;
+    private Float rating;
 
-    public String getName() {
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getLoginName() {
+        return loginName;
+    }
+
+    public void setLoginName(String loginName) {
+        this.loginName = loginName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Name getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(Name name) {
         this.name = name;
     }
 
-    public String getUserId() {
-        return userId;
+    public Address getAddress() {
+        return address;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
-    public String getEmailId() {
-        return emailId;
+    public String getToken() {
+        return token;
     }
 
-    public void setEmailId(String emailId) {
-        this.emailId = emailId;
+    public void setToken(String token) {
+        this.token = token;
     }
 
-    public Integer getCreditScore() {
-        return creditScore;
+    public AccessTokens getAccessTokens() {
+        return accessTokens;
     }
 
-    public void setCreditScore(Integer creditScore) {
-        this.creditScore = creditScore;
+    public void setAccessTokens(AccessTokens accessTokens) {
+        this.accessTokens = accessTokens;
     }
 
-    public Location getLocation() {
-        return location;
-    }
-
-    public void setLocation(Location location) {
-        this.location = location;
-    }
-
-    public String getContactNumber() {
-        return contactNumber;
-    }
-
-    public void setContactNumber(String contactNumber) {
-        this.contactNumber = contactNumber;
-    }
-
-    public String getRating() {
+    public Float getRating() {
         return rating;
     }
 
-    public void setRating(String rating) {
+    public void setRating(Float rating) {
         this.rating = rating;
     }
 }
