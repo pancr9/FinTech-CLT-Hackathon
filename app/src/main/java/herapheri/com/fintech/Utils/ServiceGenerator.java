@@ -27,7 +27,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ServiceGenerator {
 
-    private static final String BASE_URL_YODLEE = "https://www";
+    private static final String BASE_URL_YODLEE = "https://developer.api.yodlee.com/ysl/restserver/v1/";
     private static final String BASE_URL_BLOCK_CHAIN = "https://www";
     private static Boolean isYodleeUsed = false;
 
