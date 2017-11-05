@@ -33,52 +33,54 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        String cobrandLogin = getString(R.string.Cobrand_Login);
-        String cobrandPassword = getString(R.string.CobrandPassword);
-        RequestBody body = RequestBody.create(mediaType, "{\"cobrand\":{\"cobrandLogin\":\"" + cobrandLogin + "\",\"cobrandPassword\":\"" + cobrandPassword + "\"}}");
-
-        RetrofitAPI retrofitAPI = ServiceGenerator.createServiceYodleeSetup(RetrofitAPI.class);
-        Call<Cobrand> cobrandCall = retrofitAPI.doCobrandLogin(body);
-
-        cobrandCall.enqueue(new Callback<Cobrand>() {
-            @Override
-            public void onResponse(@NonNull Call<Cobrand> call, @NonNull Response<Cobrand> response) {
-
-
-                if (response.isSuccessful() && response.body() != null) {
-                    Cobrand cobrand = response.body();
-
-                    //Set cob-session.
-                    SessionGlobals.setCobSession(cobrand.getSession().getCobSession());
-
-                } else
-                    displayError(response);
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<Cobrand> call, @NonNull Throwable t) {
-                Log.d("response", "Failure");
-            }
-        });
-
-
         next = (Button) findViewById(R.id.btn_login);
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                //Input is not null.
-                //Call user login.
-                callUserLogin();
+                String cobrandLogin = getString(R.string.Cobrand_Login);
+                String cobrandPassword = getString(R.string.CobrandPassword);
+                String pass = "3cffef4e-5209-4375-9473-c4058635a0e4";
+
+                String requestBody = "{" +
+                        "\"cobrand\":      {" +
+                        "\"cobrandLogin\": " + "\"" + cobrandLogin + "\"" + "," +
+                        "\"cobrandPassword\": " + "\"" + pass + "\"" + "," +
+                        "\"locale\": \"en_US\"" +
+                        "}" +
+                        "}";
+
+                RequestBody body = RequestBody.create(mediaType, requestBody);
+
+                RetrofitAPI retrofitAPI = ServiceGenerator.createServiceYodleeSetup(RetrofitAPI.class);
+                Call<Cobrand> cobrandCall = retrofitAPI.doCobrandLogin(body);
+
+                cobrandCall.enqueue(new Callback<Cobrand>() {
+                    @Override
+                    public void onResponse(@NonNull Call<Cobrand> call, @NonNull Response<Cobrand> response) {
+
+                        if (response.isSuccessful() && response.body() != null) {
+                            Cobrand cobrand = response.body();
+
+                            //Set cob-session.
+                            SessionGlobals.setCobSession(cobrand.getSession().getCobSession());
+                            callUserLogin();
+                        } else
+                            displayError(response);
+                    }
+
+                    @Override
+                    public void onFailure(@NonNull Call<Cobrand> call, @NonNull Throwable t) {
+                        Log.d("response", "Failure");
+                    }
+                });
             }
         });
-
-
     }
 
     private void callUserLogin() {
 
-        RetrofitAPI retrofitAPI = ServiceGenerator.createServiceYodlee(RetrofitAPI.class);
+        RetrofitAPI retrofitAPI = ServiceGenerator.createServiceYodlee(RetrofitAPI.class, 1);
 
         //Pre-onfigured user.
         String userName = "sbMemd308d35f2c4a8af430af782b5e93c113ca1";
@@ -91,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
                 "\"locale\": \"en_US\"" +
                 "}" +
                 "}";
+
         RequestBody body1 = RequestBody.create(mediaType, requestBody);
         Call<User> userLoginCall = retrofitAPI.doUserLogin(body1);
         userLoginCall.enqueue(new Callback<User>() {
@@ -110,7 +113,6 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("Response User ", "Failed");
             }
         });
-
     }
 
 

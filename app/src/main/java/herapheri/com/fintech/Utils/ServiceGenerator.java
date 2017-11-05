@@ -119,21 +119,26 @@ public class ServiceGenerator {
 
     /* package */
     static Retrofit getRetrofit() {
-
-        return retrofitYodleeCob;
-
+        switch (type) {
+            case 1:
+                return retrofitYodleeCob;
+            default:
+                return retrofitYodlee;
+        }
     }
 
-    public static <S> S createServiceYodlee(Class<S> retrofitAPI) {
-
+    public static <S> S createServiceYodlee(Class<S> retrofitAPI, int serviceType) {
+        type = serviceType;
         return retrofitYodlee.create(retrofitAPI);
     }
 
-    public static <S> S createServiceBlockChain(Class<S> retrofitAPI) {
+    public static <S> S createServiceBlockChain(Class<S> retrofitAPI, int serviceType) {
+        type = serviceType;
         return retrofitBlockChain.create(retrofitAPI);
     }
 
     public static <S> S createServiceYodleeSetup(Class<S> retrofitAPI) {
+
         return retrofitYodleeCob.create(retrofitAPI);
     }
 }
