@@ -13,11 +13,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import herapheri.com.fintech.Model.Item;
 import herapheri.com.fintech.R;
 
 /**
@@ -33,8 +32,8 @@ public class HomeFragment extends Fragment {
         RecyclerView rv = (RecyclerView)v.findViewById(R.id.rv);
         ArrayList<Item> items = new ArrayList<>();
         Item item = new Item();
-        item.setCostPerHour("Price: 3.00$");
-        item.setName("User: Mohamed");
+        item.setPricePerday(3.05F);
+        item.setName("Tractor Trailer");
 
         items.add(item);
         items.add(item);
@@ -55,48 +54,6 @@ public class HomeFragment extends Fragment {
         return v;
     }
 
-    public class Item {
-        String imgPath;
-        String name;
-        String costPerHour;
-        String itemDescription;
-
-
-        public Item() {
-        }
-
-        public String getItemDescription() {
-            return itemDescription;
-        }
-
-        public void setItemDescription(String itemDescription) {
-            this.itemDescription = itemDescription;
-        }
-
-        public String getImgPath() {
-            return imgPath;
-        }
-
-        public void setImgPath(String imgPath) {
-            this.imgPath = imgPath;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public String getCostPerHour() {
-            return costPerHour;
-        }
-
-        public void setCostPerHour(String costPerHour) {
-            this.costPerHour = costPerHour;
-        }
-    }
 
 
     public class CustomArrayAdapter extends RecyclerView.Adapter<CustomArrayAdapter.CustomViewHolder> {
@@ -115,10 +72,29 @@ public class HomeFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     Intent ii = new Intent(getActivity(),PostActivity.class);
-                    ii.putExtra("name",items.get(i).getName());
-                    ii.putExtra("cost",items.get(i).getCostPerHour());
-                    ii.putExtra("desc",items.get(i).getItemDescription());
-                    ii.putExtra("path",items.get(i).getImgPath());
+                    Item item = new Item();
+                    item.setName("Tractor Trailer");
+                    item.setActive(false);
+                    item.setBrand("Walmart");
+                    item.setCurrentTransactionId("000111");
+                    item.setId("1");
+                    item.setImageHash("#HASH");
+                    item.setModel("Oxford");
+                    item.setLenderId("001");
+                    item.setManufactureYear(Integer.parseInt("2017"));
+                    //Location l = new Location("provider");
+                    //item.setLocation(l);
+                    item.setPricePerday(3.50f);
+                    item.setRating(9.8f);
+                    item.setTimeRented(Long.parseLong("3333"));
+                    item.setTimeReturned(Long.parseLong("4444"));
+                    item.setType("A");
+                    item.setWeight(200.00f);
+                    //ii.putExtra("name",items.get(i).getName());
+                    //ii.putExtra("cost",items.get(i).getCostPerHour());
+                    //ii.putExtra("desc",items.get(i).getItemDescription());
+                   // ii.putExtra("path",items.get(i).getImgPath());
+                    ii.putExtra("item",item);
                     startActivity(ii);
                 }
             });
@@ -131,16 +107,16 @@ public class HomeFragment extends Fragment {
             //Item feedItem = feedItemList.get(i);
 
             //Render image using Picasso library
-            if (items.get(i).getImgPath() != null && items.get(i).getImgPath().length() > 0) {
-                Picasso.with(mContext).load(items.get(i).getImgPath())
-                        .placeholder(R.drawable.ic_action_name)
-                        .into(customViewHolder.imageView);
-            }
+//            if (items.get(i).getImgPath() != null && items.get(i).getImgPath().length() > 0) {
+//                Picasso.with(mContext).load(items.get(i).getImgPath())
+//                        .placeholder(R.drawable.ic_action_name)
+//                        .into(customViewHolder.imageView);
+//            }
 
             //Setting text view title
 
             customViewHolder.name.setText(items.get(i).getName());
-            customViewHolder.age.setText(items.get(i).getCostPerHour());
+            customViewHolder.age.setText(items.get(i).getPricePerday()+"$ cost per day");
         }
 
         @Override

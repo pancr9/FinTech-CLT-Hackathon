@@ -1,13 +1,25 @@
 package herapheri.com.fintech.Controller;
 
+import android.content.Context;
+import android.location.Location;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.squareup.picasso.Picasso;
+import java.util.ArrayList;
+import java.util.List;
 
+import herapheri.com.fintech.Model.Item;
 import herapheri.com.fintech.R;
 
 /**
@@ -21,6 +33,9 @@ public class PostActivity extends AppCompatActivity {
     TextView desc;
     String imagePath;
     ImageView img;
+    Item item;
+    ListView post_lv;
+    Button purchase;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -30,17 +45,103 @@ public class PostActivity extends AppCompatActivity {
         name = (TextView) findViewById(R.id.name);
         cost = (TextView) findViewById(R.id.cost);
         desc = (TextView) findViewById(R.id.desc);
-        name.setText(getIntent().getStringExtra("name"));
-        cost.setText(getIntent().getStringExtra("cost"));
-        desc.setText(getIntent().getStringExtra("desc"));
-        imagePath = getIntent().getStringExtra("imgpath");
+        item = (Item) getIntent().getSerializableExtra("item");
+        name.setText("Name : "+item.getName());
+        cost.setText("Cost per day : "+item.getPricePerday()+"$");
+        //desc.setText(getIntent().getStringExtra("desc"));
+        //imagePath = getIntent().getStringExtra("imgpath");
         img = (ImageView) findViewById(R.id.postimg);
-        if (imagePath != null && imagePath.length() > 0) {
-            Picasso.with(this).load(imagePath)
-                    .placeholder(R.drawable.ic_action_name)
-                    .into(img);
+        post_lv = (ListView) findViewById(R.id.post_info);
+        purchase = (Button) findViewById(R.id.purchaseBtn);
+        purchase.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(PostActivity.this,"Sending order!",Toast.LENGTH_LONG).show();
+            }
+        });
+
+//        if (imagePath != null && imagePath.length() > 0) {
+//            Picasso.with(this).load(imagePath)
+//                    .placeholder(R.drawable.ic_action_name)
+//                    .into(img);
+//        }
+
+        ArrayList<String> contents = new ArrayList<>();
+        item.setActive(false);
+        item.setBrand("Walmart");
+        item.setCurrentTransactionId("000111");
+        item.setId("1");
+        item.setImageHash("#HASH");
+        item.setModel("Oxford");
+        item.setLenderId("001");
+        item.setManufactureYear(Integer.parseInt("2017"));
+        Location l = new Location("provider");
+        //item.setLocation(l);
+        item.setPricePerday(3.50f);
+        item.setRating(9.8f);
+        item.setTimeRented(Long.parseLong("3333"));
+        item.setTimeReturned(Long.parseLong("4444"));
+        item.setType("A");
+        item.setWeight(200.00f);
+        contents.add("Active : "+item.getActive());
+        contents.add("Brand : "+item.getBrand());
+        contents.add("Current Transaction ID : "+item.getCurrentTransactionId());
+        contents.add("ID : "+item.getId());
+        contents.add("Image Hash : "+item.getImageHash());
+        contents.add("Model : "+item.getModel());
+        contents.add("LenderID : "+item.getLenderId());
+        contents.add("Manufacture Year : "+item.getManufactureYear());
+        //contents.add("Location : "+item.getLocation());
+        contents.add("Price Per Day : "+item.getPricePerday());
+        contents.add("Rating : "+item.getRating());
+        contents.add("Time Rented : "+item.getTimeRented());
+        contents.add("Time Returned : "+item.getTimeReturned());
+        contents.add("Type : "+item.getType());
+        contents.add("Weight : "+item.getWeight());
+        CustomPstAdapter customPstAdapter = new CustomPstAdapter(this,R.layout.activity_post_item,contents);
+        post_lv.setAdapter(customPstAdapter);
+
+
+
+    }
+
+    public class CustomPstAdapter extends ArrayAdapter<String> {
+
+        Context c;
+        int r;
+        List<String> s;
+
+        public CustomPstAdapter(@NonNull Context context, int resource, @NonNull List<String> objects) {
+
+            super(context, resource, objects);
+            c = context;
+            r = resource;
+            s = objects;
         }
 
+        @Override
+        public int getCount() {
+            return s.size();
+        }
 
+        @NonNull
+        @Override
+        public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+            LayoutInflater inflater = (LayoutInflater) c
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            convertView = inflater.inflate(r, parent, false);
+            convertView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+
+                }
+            });
+
+
+            TextView name = (TextView) convertView.findViewById(R.id.post_item);
+            name.setText(s.get(position));
+            return convertView;
+        }
     }
 }

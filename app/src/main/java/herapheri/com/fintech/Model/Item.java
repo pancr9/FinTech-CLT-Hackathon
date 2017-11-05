@@ -5,12 +5,14 @@ import android.location.Location;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by Rekhansh on 11/4/2017.
  * Model class for Items for lending.
  */
 
-public class Item {
+public class Item implements Serializable {
 
     @SerializedName("name")
     @Expose
