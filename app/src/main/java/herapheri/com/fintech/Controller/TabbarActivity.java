@@ -149,6 +149,7 @@ public class TabbarActivity extends AppCompatActivity {
             case R.id.action_exit:
                 Toast.makeText(this, " Logout", Toast.LENGTH_SHORT)
                         .show();
+                finish();
                 break;
             // action with ID action_settings was selected
 

@@ -1,6 +1,9 @@
 package herapheri.com.fintech.Utils;
 
+import java.util.ArrayList;
+
 import herapheri.com.fintech.Model.Cobrand;
+import herapheri.com.fintech.Model.Item;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -36,33 +39,13 @@ public interface RetrofitAPI {
     @GET("accounts?status=ACTIVE&container=bank")
     Call<ResponseBody> getAccounts();
 
-    /*
-     * GET calls.
-     */
-    //Call to fetch account and rest details.
-
 
     /*
-     * POST calls.
+     * API call to fetch all the items.
+     * Assumption: Data received does not belong to the users posting.
      */
-    //Card Money Transfer.
-    //http://tasgroup.cashless30.apiblueprint.org/postsales/card/transfer
-
-
-    //Card Top-up.
-    //http://tasgroup.cashless30.apiblueprint.org/postsales/card/topup
-
-    //Card Withdrawal
-
-
-    //Card Details
-    //http://tasgroup.cashless30.apiblueprint.org/postsales/card/detail
-
-    //Generate Session ID for accessing OBDX services.
-    //http://129.150.95.24:8001/access
-
-
-    //PUT calls.
+    @GET("get")
+    Call<ArrayList<Item>> getItemsForRenting();
 
 
 }

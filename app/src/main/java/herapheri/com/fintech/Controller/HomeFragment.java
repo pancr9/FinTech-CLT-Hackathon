@@ -18,6 +18,11 @@ import java.util.List;
 
 import herapheri.com.fintech.Model.Item;
 import herapheri.com.fintech.R;
+import herapheri.com.fintech.Utils.RetrofitAPI;
+import herapheri.com.fintech.Utils.ServiceGenerator;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by codyj on 11/4/2017.
@@ -25,6 +30,9 @@ import herapheri.com.fintech.R;
 
 public class HomeFragment extends Fragment {
     Item item;
+    ArrayList<Item> items;
+    CustomArrayAdapter customArrayAdapter;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -42,23 +50,47 @@ public class HomeFragment extends Fragment {
         items.add(item);
         items.add(item);
         items.add(item);
-
+        //fetchAllItems();
         rv.setHasFixedSize(true);
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
 
         rv.setLayoutManager(gridLayoutManager);
-        CustomArrayAdapter customArrayAdapter = new CustomArrayAdapter(getActivity(), items);
+        customArrayAdapter = new CustomArrayAdapter(getActivity(), items);
         rv.setAdapter(customArrayAdapter);
         return v;
     }
 
-    public Double getDistanceBetweenPoints(){
+    private void fetchAllItems() {
+        RetrofitAPI retrofit = ServiceGenerator.createServiceForCloud(RetrofitAPI.class, 1);
+        items = new ArrayList<>();
+
+        Call<ArrayList<Item>> listCall = retrofit.getItemsForRenting();
+        listCall.enqueue(new Callback<ArrayList<Item>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Item>> call, Response<ArrayList<Item>> response) {
+                if (response.body() != null && response.isSuccessful()) {
+                    //Display items.
+                    items = response.body();
+                }
+                customArrayAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Item>> call, Throwable t) {
+
+            }
+        });
+
+
+    }
+
+    public Double getDistanceBetweenPoints() {
         double lat = 35.311707f;
         double lon = -80.743051f;
         double ilat = item.getLocation().getLatitude();
         double ilon = item.getLocation().getLatitude();
-        return distance(lat,lon,ilat,ilon);
+        return distance(lat, lon, ilat, ilon);
 
     }
 
@@ -98,8 +130,9 @@ public class HomeFragment extends Fragment {
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent ii = new Intent(getActivity(),PostActivity.class);
-                    Item item = new Item();
+                    Intent ii = new Intent(getActivity(), PostActivity.class);
+
+                    Item item = items.get(i);
                     item.setName("Tractor Trailer");
                     item.setActive(false);
                     item.setBrand("Walmart");
@@ -115,7 +148,7 @@ public class HomeFragment extends Fragment {
                     item.setTimeReturned(Long.parseLong("4444"));
                     item.setType("A");
                     item.setWeight(200.00f);
-                    ii.putExtra("item",item);
+                    ii.putExtra("item", item);
                     startActivity(ii);
                 }
             });
@@ -128,7 +161,7 @@ public class HomeFragment extends Fragment {
 
             //Setting text view title
             customViewHolder.name.setText(items.get(i).getName());
-            customViewHolder.age.setText(items.get(i).getPricePerday()+"$ cost per day");
+            customViewHolder.age.setText(items.get(i).getPricePerday() + "$ cost per day");
         }
 
         @Override
@@ -193,8 +226,6 @@ public class HomeFragment extends Fragment {
 //            return convertView;
 //        }
 //    }
-
-
 
 
 }

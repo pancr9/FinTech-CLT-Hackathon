@@ -56,8 +56,8 @@ public class PostActivity extends AppCompatActivity {
         cost = (TextView) findViewById(R.id.cost);
         desc = (TextView) findViewById(R.id.desc);
         item = (Item) getIntent().getSerializableExtra("item");
-        name.setText("Name : "+item.getName());
-        cost.setText("Cost per day : "+item.getPricePerday()+"$");
+        name.setText("Name : " + item.getName());
+        cost.setText("Cost per day : " + item.getPricePerday() + "$");
         //desc.setText(getIntent().getStringExtra("desc"));
         //imagePath = getIntent().getStringExtra("imgpath");
         img = (ImageView) findViewById(R.id.postimg);
@@ -80,7 +80,7 @@ public class PostActivity extends AppCompatActivity {
         purchase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(PostActivity.this,"Sending order!",Toast.LENGTH_LONG).show();
+                Toast.makeText(PostActivity.this, "Sending order!", Toast.LENGTH_LONG).show();
                 finish();
             }
         });
@@ -108,22 +108,22 @@ public class PostActivity extends AppCompatActivity {
         item.setTimeReturned(Long.parseLong("4444"));
         item.setType("A");
         item.setWeight(200.00f);
-        contents.add("Active : "+item.getActive());
-        contents.add("Brand : "+item.getBrand());
-        contents.add("Current Transaction ID : "+item.getCurrentTransactionId());
-        contents.add("ID : "+item.getId());
-        contents.add("Image Hash : "+item.getImageHash());
-        contents.add("Model : "+item.getModel());
-        contents.add("LenderID : "+item.getLenderId());
-        contents.add("Manufacture Year : "+item.getManufactureYear());
+        contents.add("Active : " + item.getActive());
+        contents.add("Brand : " + item.getBrand());
+        contents.add("Current Transaction ID : " + item.getCurrentTransactionId());
+        contents.add("ID : " + item.getId());
+        contents.add("Image Hash : " + item.getImageHash());
+        contents.add("Model : " + item.getModel());
+        contents.add("LenderID : " + item.getLenderId());
+        contents.add("Manufacture Year : " + item.getManufactureYear());
         //contents.add("Location : "+item.getLocation());
-        contents.add("Price Per Day : "+item.getPricePerday());
-        contents.add("Rating : "+item.getRating());
-        contents.add("Time Rented : "+item.getTimeRented());
-        contents.add("Time Returned : "+item.getTimeReturned());
-        contents.add("Type : "+item.getType());
-        contents.add("Weight : "+item.getWeight());
-        CustomPstAdapter customPstAdapter = new CustomPstAdapter(this,R.layout.activity_post_item,contents);
+        contents.add("Price Per Day : " + item.getPricePerday());
+        contents.add("Rating : " + item.getRating());
+        contents.add("Time Rented : " + item.getTimeRented());
+        contents.add("Time Returned : " + item.getTimeReturned());
+        contents.add("Type : " + item.getType());
+        contents.add("Weight : " + item.getWeight());
+        CustomPstAdapter customPstAdapter = new CustomPstAdapter(this, R.layout.activity_post_item, contents);
         post_lv.setAdapter(customPstAdapter);
 
         t = new Transaction();
@@ -149,17 +149,17 @@ public class PostActivity extends AppCompatActivity {
 
     }
 
-    public void sendTransaction(){
+    public void sendTransaction() {
 
     }
 
-    public class CustomPstAdapter extends ArrayAdapter<String> {
+    private class CustomPstAdapter extends ArrayAdapter<String> {
 
         Context c;
         int r;
         List<String> s;
 
-        public CustomPstAdapter(@NonNull Context context, int resource, @NonNull List<String> objects) {
+        CustomPstAdapter(@NonNull Context context, int resource, @NonNull List<String> objects) {
 
             super(context, resource, objects);
             c = context;

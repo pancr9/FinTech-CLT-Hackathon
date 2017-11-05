@@ -29,6 +29,7 @@ public class ServiceGenerator {
 
     private static final String BASE_URL_YODLEE = "https://developer.api.yodlee.com/ysl/restserver/v1/";
     private static final String BASE_URL_YODLEE_443 = "https://developer.api.yodlee.com:443/ysl/restserver/v1/";
+    private static final String BASE_URL_CLOUD = "https://mcs-gse00011680.mobileenv.us2.oraclecloud.com:443/mobile/custom/getItems/";
 
     private static Integer type;
 
@@ -101,6 +102,27 @@ public class ServiceGenerator {
             .addInterceptor(loggingInterceptor)
             .dispatcher(dispatcher);
 
+    private static OkHttpClient.Builder httpClientCloud = new OkHttpClient.Builder()
+            .addInterceptor(new Interceptor() {
+                @Override
+                public Response intercept(@NonNull Chain chain) throws IOException {
+                    Request original = chain.request();
+
+                    Request request = original.newBuilder()
+                            .header("Content-Type", "application/json")
+                            .header("cache-control", "no-cache")
+                            .header("Oracle-Mobile-Backend-Id", "10cc6d0f-50b4-46d4-af4f-c71fee672755")
+                            .method(original.method(), original.body())
+                            .build();
+
+                    return chain.proceed(request);
+                }
+            })
+            .readTimeout(40, TimeUnit.SECONDS)
+            .connectTimeout(20, TimeUnit.SECONDS)
+            .writeTimeout(40, TimeUnit.SECONDS)
+            .addInterceptor(loggingInterceptor)
+            .dispatcher(dispatcher);
 
     private static Gson gson = new GsonBuilder()
             .registerTypeAdapter(Date.class, new DateDeserializer())
@@ -108,6 +130,10 @@ public class ServiceGenerator {
 
     private static Retrofit.Builder builderYodlee = new Retrofit.Builder()
             .baseUrl(BASE_URL_YODLEE)
+            .addConverterFactory(GsonConverterFactory.create(gson));
+
+    private static Retrofit.Builder builderCloudData = new Retrofit.Builder()
+            .baseUrl(BASE_URL_CLOUD)
             .addConverterFactory(GsonConverterFactory.create(gson));
 
     private static Retrofit.Builder builderYodleeAfterAuth = new Retrofit.Builder()
@@ -119,6 +145,8 @@ public class ServiceGenerator {
     private static Retrofit retrofitYodleeCob = builderYodlee.client(httpClientYodleeCob.build()).build();
 
     private static Retrofit retrofitYodleeAfterAuth = builderYodleeAfterAuth.client(httpClientYodleeAfterAuth.build()).build();
+
+    private static Retrofit retrofitCloud = builderCloudData.client(httpClientCloud.build()).build();
 
     /* package */
     static Retrofit getRetrofit() {
@@ -145,5 +173,10 @@ public class ServiceGenerator {
     public static <S> S createServiceYodleeAfterAuth(Class<S> retrofitAPI, int serviceType) {
 
         return retrofitYodleeAfterAuth.create(retrofitAPI);
+    }
+
+    public static <S> S createServiceForCloud(Class<S> retrofitAPI, int serviceType) {
+
+        return retrofitCloud.create(retrofitAPI);
     }
 }
