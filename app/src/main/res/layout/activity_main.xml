@@ -59,6 +59,7 @@
                     android:layout_height="wrap_content"
                     android:hint="Email"
                     android:inputType="textEmailAddress"
+                    android:textColorHighlight="@color/colorPrimary"
                     android:visibility="visible" />
 
             </android.support.design.widget.TextInputLayout>

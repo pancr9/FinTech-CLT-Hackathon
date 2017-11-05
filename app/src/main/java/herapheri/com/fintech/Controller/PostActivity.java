@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -20,6 +22,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import herapheri.com.fintech.Model.Item;
+import herapheri.com.fintech.Model.Money;
+import herapheri.com.fintech.Model.Transaction;
 import herapheri.com.fintech.R;
 
 /**
@@ -36,6 +40,11 @@ public class PostActivity extends AppCompatActivity {
     Item item;
     ListView post_lv;
     Button purchase;
+    Transaction t;
+    CheckBox trace;
+    CheckBox insure;
+    Boolean trac;
+    Boolean insur;
 
 
     @Override
@@ -52,6 +61,20 @@ public class PostActivity extends AppCompatActivity {
         //desc.setText(getIntent().getStringExtra("desc"));
         //imagePath = getIntent().getStringExtra("imgpath");
         img = (ImageView) findViewById(R.id.postimg);
+        insure = (CheckBox) findViewById(R.id.insure);
+        insure.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                insur = isChecked;
+            }
+        });
+        trace = (CheckBox) findViewById(R.id.track);
+        trace.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                trac = isChecked;
+            }
+        });
         post_lv = (ListView) findViewById(R.id.post_info);
         purchase = (Button) findViewById(R.id.purchaseBtn);
         purchase.setOnClickListener(new View.OnClickListener() {
@@ -103,7 +126,30 @@ public class PostActivity extends AppCompatActivity {
         CustomPstAdapter customPstAdapter = new CustomPstAdapter(this,R.layout.activity_post_item,contents);
         post_lv.setAdapter(customPstAdapter);
 
+        t = new Transaction();
+        t.setBeforeImageURL("");
+        t.setAfterImageURL("");
+        t.setEndTime(Long.parseLong("10002"));
+        t.setExtraCost(4.50f);
+        t.setId(Long.parseLong("1"));
+        t.setLeaseBroken(false);
+        Money m = new Money();
+        m.setCurrency("USD");
+        m.setAmount("78.00$");
+        t.setPrice(m);
+        t.setInsuranceOpted(insur);
+        t.setTracking(trac);
+        t.setLenderId("00");
+        t.setRenterId("09");
+        t.setItemId("01U2M");
+        t.setTransactionCost("0.30");
+        t.setStartTime(Long.parseLong("1300"));
+        sendTransaction();
 
+
+    }
+
+    public void sendTransaction(){
 
     }
 
