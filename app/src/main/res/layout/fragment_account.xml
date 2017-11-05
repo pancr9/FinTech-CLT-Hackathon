@@ -89,11 +89,11 @@
                     android:id="@+id/button3"
                     android:layout_width="wrap_content"
                     android:layout_height="20dp"
-                    android:layout_alignBottom="@+id/liability"
                     android:layout_alignParentEnd="true"
                     android:layout_marginEnd="8dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="90dp"
                     android:textSize="10dp"
+                    android:visibility="gone"
                     android:background="@drawable/shape_drawable"
                     android:text="Sign Out"
                     android:textColor="#ffffff" />

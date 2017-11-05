@@ -62,6 +62,15 @@ public class Transaction {
     @SerializedName("extraCost")
     @Expose
     private Float extraCost;
+    private Boolean tracking;
+
+    public Boolean getTracking() {
+        return tracking;
+    }
+
+    public void setTracking(Boolean tracking) {
+        this.tracking = tracking;
+    }
 
     //Use when you get data from yodley.
     public void updatePriceYodleyToBlockChain() {

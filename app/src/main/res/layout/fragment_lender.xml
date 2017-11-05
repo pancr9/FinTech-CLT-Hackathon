@@ -19,6 +19,7 @@
             android:id="@+id/edit"
             style="@style/AppTheme"
             android:layout_width="40sp"
+            android:visibility="gone"
             android:layout_height="40sp"
             android:layout_gravity="bottom"
             android:layout_marginBottom="16sp"
@@ -34,7 +35,7 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:layout_gravity="center|bottom"
-            android:background="@drawable/ic_action_name" />
+            android:background="@drawable/btn_capture" />
 
         <Button
             android:id="@+id/gallery"
@@ -42,9 +43,10 @@
             android:layout_width="40sp"
             android:layout_height="40sp"
             android:layout_gravity="bottom|end"
+            android:visibility="gone"
             android:layout_marginBottom="16sp"
             android:layout_marginRight="60sp"
-            android:background="@drawable/ic_action_name" />
+            android:background="@drawable/btn_capture" />
     </FrameLayout>
 
 

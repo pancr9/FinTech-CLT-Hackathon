@@ -5,11 +5,11 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -19,7 +19,7 @@ import android.widget.Toast;
 
 import herapheri.com.fintech.R;
 
-public class TabbarActivity extends FragmentActivity {
+public class TabbarActivity extends AppCompatActivity {
 
     FragmentManager fragmentManager;
     private FragmentTabHost tabHost;
@@ -50,6 +50,8 @@ public class TabbarActivity extends FragmentActivity {
 //        tabHost.addTab(tabHost.newTabSpec("Same Room").setIndicator("Same Room"),LocalFragment.class,null);
 //        tabHost.addTab(tabHost.newTabSpec("Settings").setIndicator("Settings"),SettingsFragment.class,null);
         setUpTablayout();
+        setSupportActionBar(toolbar);
+
         //rv.setHasFixedSize(true);
         //LinearLayoutManager llm = new LinearLayoutManager(this);
         //rv.setLayoutManager(llm);
@@ -207,15 +209,12 @@ public class TabbarActivity extends FragmentActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             // action with ID action_refresh was selected
-            case R.id.action_refresh:
-                Toast.makeText(this, "Refresh selected", Toast.LENGTH_SHORT)
+            case R.id.action_exit:
+                Toast.makeText(this, " Logout", Toast.LENGTH_SHORT)
                         .show();
                 break;
             // action with ID action_settings was selected
-            case R.id.action_settings:
-                Toast.makeText(this, "Settings selected", Toast.LENGTH_SHORT)
-                        .show();
-                break;
+
             default:
                 break;
         }

@@ -3,10 +3,14 @@ package herapheri.com.fintech.Controller;
 
 import android.Manifest;
 import android.content.Context;
-import android.content.Intent;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.ImageFormat;
 import android.graphics.SurfaceTexture;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCaptureSession;
 import android.hardware.camera2.CameraCharacteristics;
@@ -28,6 +32,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.util.Size;
 import android.util.SparseIntArray;
@@ -37,6 +42,7 @@ import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.io.File;
@@ -288,10 +294,44 @@ public class LenderFragment extends Fragment {
                 public void onCaptureCompleted(CameraCaptureSession session, CaptureRequest request, TotalCaptureResult result) {
                     super.onCaptureCompleted(session, request, result);
                     //Toast.makeText(getContext(), "Saved:" + file, Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(getActivity(),LenderActivity.class);
-                    i.putExtra("path",file);
-                    startActivity(i);
-                    //createCameraPreview();
+                    AlertDialog.Builder ImageDialog = new AlertDialog.Builder(getActivity());
+                    ImageDialog.setTitle("Title");
+                    ImageView showImage = new ImageView(getActivity());
+
+                    Bitmap bmp = BitmapFactory.decodeFile(imagePath);
+                    try {
+                        FileOutputStream out = new FileOutputStream(imagePath);
+                        bmp.compress(Bitmap.CompressFormat.PNG, 100, out); //100-best quality
+                        showImage.setBackground(new BitmapDrawable(getResources(),bmp));
+                        showImage.getLayoutParams().height = 128;
+                        showImage.getLayoutParams().width = 96;
+                        showImage.requestLayout();
+                        out.close();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    Bitmap b = BitmapFactory.decodeFile(imagePath);
+                    showImage.setBackground(Drawable.createFromPath(imagePath));
+                    ImageDialog.setView(showImage);
+
+                    ImageDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener()
+                    {
+                        public void onClick(DialogInterface arg0, int arg1)
+                        {
+
+                        }
+                    });
+                    ImageDialog.setPositiveButton("Lend!", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                           // Intent i = new Intent(getActivity(),LenderActivity.class);
+                            //i.putExtra("path",file);
+                            //startActivity(i);
+                        }
+                    });
+                    ImageDialog.show();
+
+                    createCameraPreview();
                 }
             };
             cameraDevice.createCaptureSession(outputSurfaces, new CameraCaptureSession.StateCallback() {
