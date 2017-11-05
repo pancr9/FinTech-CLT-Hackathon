@@ -1,4 +1,4 @@
-package herapheri.com.fintech;
+package herapheri.com.fintech.Model;
 
 /**
  * Created by codyj on 11/5/2017.
