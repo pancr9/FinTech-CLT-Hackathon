@@ -2,6 +2,7 @@ package herapheri.com.fintech.Model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import java.util.Date;
 
 /**
  * Created by realm on 11/5/2017.
@@ -12,6 +13,10 @@ public class Networth {
     @SerializedName("asset")
     @Expose
     private Money asset;
+
+    @SerializedName("date")
+    @Expose
+    private Date date;
 
     @SerializedName("networth")
     @Expose
@@ -44,5 +49,13 @@ public class Networth {
 
     public void setLiability(Money liability) {
         this.liability = liability;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }
