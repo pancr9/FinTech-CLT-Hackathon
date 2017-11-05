@@ -16,9 +16,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".TabbarActivity" />
-        <activity android:name=".PostActivity" />
-        <activity android:name=".profile"></activity>
+        <activity android:name=".Controller.TabbarActivity" />
+        <activity android:name=".Controller.PostActivity" />
 
     </application>
 

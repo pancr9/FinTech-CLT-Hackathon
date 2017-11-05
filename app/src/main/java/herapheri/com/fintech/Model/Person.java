@@ -1,7 +1,9 @@
-package herapheri.com.fintech;
+package herapheri.com.fintech.Model;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import herapheri.com.fintech.R;
 
 /**
  * Created by codyj on 11/4/2017.

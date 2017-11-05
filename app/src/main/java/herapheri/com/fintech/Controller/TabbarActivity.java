@@ -1,4 +1,4 @@
-package herapheri.com.fintech;
+package herapheri.com.fintech.Controller;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -12,6 +12,8 @@ import android.support.v4.app.FragmentTabHost;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.inputmethod.InputMethodManager;
+
+import herapheri.com.fintech.R;
 
 public class TabbarActivity extends FragmentActivity {
 

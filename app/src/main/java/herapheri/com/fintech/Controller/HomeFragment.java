@@ -1,4 +1,4 @@
-package herapheri.com.fintech;
+package herapheri.com.fintech.Controller;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,8 +13,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import herapheri.com.fintech.R;
 
 /**
  * Created by codyj on 11/4/2017.
@@ -124,12 +128,11 @@ public class HomeFragment extends Fragment {
             //Item feedItem = feedItemList.get(i);
 
             //Render image using Picasso library
-           // if (!TextUtils.isEmpty(feedItem.getThumbnail())) {
-//                Picasso.with(mContext).load(feedItem.getThumbnail())
-//                        .error(R.drawable.placeholder)
-//                        .placeholder(R.drawable.placeholder)
-//                        .into(customViewHolder.imageView);
-         //   }
+            if (items.get(i).getImgPath() != null && items.get(i).getImgPath().length() > 0) {
+                Picasso.with(mContext).load(items.get(i).getImgPath())
+                        .placeholder(R.drawable.ic_action_name)
+                        .into(customViewHolder.imageView);
+            }
 
             //Setting text view title
 

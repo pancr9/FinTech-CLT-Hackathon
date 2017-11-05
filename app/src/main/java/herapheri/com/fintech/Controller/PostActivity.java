@@ -1,10 +1,12 @@
-package herapheri.com.fintech;
+package herapheri.com.fintech.Controller;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import herapheri.com.fintech.R;
 
 /**
  * Created by codyj on 11/4/2017.

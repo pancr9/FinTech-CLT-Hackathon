@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:padding="16dp"
+    android:layout_width="160dp"
+    android:layout_height="wrap_content"
     >
 
     <android.support.v7.widget.CardView
         android:id="@+id/cv"
-        android:layout_width="180dp"
+        android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:elevation="4dp">
 
         <RelativeLayout
-            android:layout_width="180dp"
-            android:layout_height="188dp"
-            android:padding="16dp">
+            android:layout_width="160dp"
+            android:layout_height="wrap_content">
 
             <ImageView
                 android:id="@+id/person_photo"
@@ -21,7 +20,9 @@
                 android:layout_height="96dp"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                android:background="@drawable/ic_action_name" />
+                android:layout_marginTop="8dp"
+                android:background="@drawable/ic_action_name"
+                android:visibility="visible" />
 
             <TextView
                 android:id="@+id/person_name"
@@ -42,8 +43,9 @@
 
                 android:layout_below="@+id/person_name"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="8dp"
                 android:text="47.00$"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="4dp"
                 android:textColor="#000000"
                 android:visibility="visible" />
 
