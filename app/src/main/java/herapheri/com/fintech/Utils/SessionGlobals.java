@@ -8,9 +8,18 @@ package herapheri.com.fintech.Utils;
 public class SessionGlobals {
 
     private static String cobSession;
+    private static String userSession;
 
     SessionGlobals() {
 
+    }
+
+    public static String getUserSession() {
+        return userSession;
+    }
+
+    public static void setUserSession(String userSession) {
+        SessionGlobals.userSession = userSession;
     }
 
     static String getCobSession() {
