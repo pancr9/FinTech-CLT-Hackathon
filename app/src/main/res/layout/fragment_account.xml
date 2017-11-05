@@ -56,7 +56,7 @@
                     android:text="Networth :"
                     android:textColor="#000000"
                     android:textSize="18dp"
-                    android:visibility="visible" />
+                    android:visibility="gone" />
 
                 <TextView
                     android:id="@+id/liability"
@@ -64,7 +64,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignStart="@+id/networth"
                     android:layout_below="@+id/networth"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="48dp"
+                    android:layout_marginBottom="8dp"
                     android:text="Liability: "
                     android:textColor="#000000"
                     android:textSize="18dp"
@@ -81,7 +82,7 @@
                     android:text="Assets: "
                     android:textColor="#000000"
                     android:textSize="18dp"
-                    android:visibility="visible" />
+                    android:visibility="gone" />
             </RelativeLayout>
         </android.support.v7.widget.CardView>
 

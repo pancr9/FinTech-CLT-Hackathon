@@ -79,7 +79,7 @@ public class PostActivity extends AppCompatActivity {
         item.setManufactureYear(Integer.parseInt("2017"));
         Location l = new Location("provider");
         //item.setLocation(l);
-        item.setPricePerday(3.50f);
+        item.setPricePerday(item.getPricePerday());
         item.setRating(9.8f);
         item.setTimeRented(Long.parseLong("3333"));
         item.setTimeReturned(Long.parseLong("4444"));

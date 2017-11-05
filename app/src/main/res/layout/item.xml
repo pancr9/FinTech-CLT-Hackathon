@@ -33,12 +33,12 @@
 
             <ImageView
                 android:id="@+id/person_photo"
-                android:layout_width="128dp"
-                android:layout_height="128dp"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="16dp"
-                android:background="@drawable/tractor"
+                android:background="@drawable/thread"
                 android:visibility="visible" />
 
             <TextView
