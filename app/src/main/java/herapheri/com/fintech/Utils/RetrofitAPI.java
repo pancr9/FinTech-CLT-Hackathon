@@ -1,5 +1,8 @@
 package herapheri.com.fintech.Utils;
 
+import java.util.ArrayList;
+
+import herapheri.com.fintech.Model.Account;
 import herapheri.com.fintech.Model.Cobrand;
 import herapheri.com.fintech.Model.User;
 import okhttp3.RequestBody;
@@ -32,9 +35,10 @@ public interface RetrofitAPI {
     @POST("/{cobrandName}/v1/cobrand/logout")
     Call<ResponseBody> doLogOut(@Path("cobrandName") String cobrandName);
 
-    //Get User.
-    @GET("/{cobrandName}/v1/user")
-    Call<User> getUserDetails(@Path("cobrandName") String cobrandName);
+    //Get all accounts of the person. (Ideally returns accounts, but modified to return account arraylist.)
+    //Function to fetch all active bank accounts.
+    @GET("/{cobrandName}/v1/accounts?status=ACTIVE&container=bank")
+    Call<ArrayList<Account>> getAccounts(@Path("cobrandName") String cobrandName);
 
 
     /*

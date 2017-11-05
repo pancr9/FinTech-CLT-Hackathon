@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     Log.d("Response User ", "Successful");
-
+                    User user = response.body();
                     Intent i = new Intent(MainActivity.this, TabbarActivity.class);
                     startActivity(i);
                 } else displayError(response);

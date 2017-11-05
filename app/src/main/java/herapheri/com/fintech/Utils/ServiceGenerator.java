@@ -78,8 +78,7 @@ public class ServiceGenerator {
             .addInterceptor(loggingInterceptor)
             .dispatcher(dispatcher);
 
-
-    private static OkHttpClient.Builder httpClientBlockChain = new OkHttpClient.Builder()
+    private static OkHttpClient.Builder httpClientYodleeAfterAuth = new OkHttpClient.Builder()
             .addInterceptor(new Interceptor() {
                 @Override
                 public Response intercept(@NonNull Chain chain) throws IOException {
@@ -87,17 +86,19 @@ public class ServiceGenerator {
 
                     Request request = original.newBuilder()
                             .header("Content-Type", "application/json")
+                            .header("cache-control", "no-cache")
                             .method(original.method(), original.body())
                             .build();
 
                     return chain.proceed(request);
                 }
             })
-            .readTimeout(20, TimeUnit.SECONDS)
-            .connectTimeout(10, TimeUnit.SECONDS)
-            .writeTimeout(20, TimeUnit.SECONDS)
+            .readTimeout(40, TimeUnit.SECONDS)
+            .connectTimeout(20, TimeUnit.SECONDS)
+            .writeTimeout(40, TimeUnit.SECONDS)
             .addInterceptor(loggingInterceptor)
             .dispatcher(dispatcher);
+
 
     private static Gson gson = new GsonBuilder()
             .registerTypeAdapter(Date.class, new DateDeserializer())
