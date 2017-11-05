@@ -129,9 +129,9 @@ public class RequestFragment extends Fragment {
                 TextView status = (TextView) convertView.findViewById(R.id.status_request);
                 TextView cost = (TextView) convertView.findViewById(R.id.cost_request);
                 ImageView result = (ImageView) convertView.findViewById(R.id.result);
-                name.setText(s.get(position).getName());
-                cost.setText(s.get(position).getCostPerHour());
-                status.setText(s.get(position).getStatus());
+                name.setText("Item: "+s.get(position).getName());
+                cost.setText("Cost per day: "+s.get(position).getCostPerHour());
+                status.setText("Status "+s.get(position).getStatus());
                 CardView cardView = (CardView) convertView.findViewById(R.id.cardView);
                 if(s.get(position).getStatus().equals("Approved")){
                 //cardView.setCardBackgroundColor(Color.parseColor("#009900"));
