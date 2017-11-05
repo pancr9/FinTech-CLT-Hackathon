@@ -7,17 +7,17 @@ package herapheri.com.fintech.Utils;
 
 class SessionGlobals {
 
-    private static String authToken;
+    private static String cobSession;
 
     SessionGlobals() {
 
     }
 
-    static String getAuthToken() {
-        return authToken;
+    static String getCobSession() {
+        return cobSession;
     }
 
-    public static void setAuthToken(String authToken) {
-        SessionGlobals.authToken = authToken;
+    public static void setCobSession(String authToken) {
+        SessionGlobals.cobSession = authToken;
     }
 }

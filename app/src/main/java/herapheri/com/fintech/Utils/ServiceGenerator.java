@@ -29,7 +29,7 @@ public class ServiceGenerator {
 
     private static final String BASE_URL_YODLEE = "https://developer.api.yodlee.com/ysl/restserver/v1/";
     private static final String BASE_URL_BLOCK_CHAIN = "https://www";
-    private static Boolean isYodleeUsed = false;
+    private static Integer type;
 
     private static HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor()
             .setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -42,7 +42,8 @@ public class ServiceGenerator {
                     Request original = chain.request();
 
                     Request request = original.newBuilder()
-                            .header("Authorization", "Bearer " + SessionGlobals.getAuthToken())
+                            .header("Content-Type", "application/json")
+                            .header("Authorization", "cobSession=" + SessionGlobals.getCobSession())
                             .method(original.method(), original.body())
                             .build();
 
@@ -54,6 +55,29 @@ public class ServiceGenerator {
             .writeTimeout(20, TimeUnit.SECONDS)
             .addInterceptor(loggingInterceptor)
             .dispatcher(dispatcher);
+
+
+    private static OkHttpClient.Builder httpClientYodleeCob = new OkHttpClient.Builder()
+            .addInterceptor(new Interceptor() {
+                @Override
+                public Response intercept(@NonNull Chain chain) throws IOException {
+                    Request original = chain.request();
+
+                    Request request = original.newBuilder()
+                            .header("Content-Type", "application/json")
+                            .header("cache-control", "no-cache")
+                            .method(original.method(), original.body())
+                            .build();
+
+                    return chain.proceed(request);
+                }
+            })
+            .readTimeout(40, TimeUnit.SECONDS)
+            .connectTimeout(20, TimeUnit.SECONDS)
+            .writeTimeout(40, TimeUnit.SECONDS)
+            .addInterceptor(loggingInterceptor)
+            .dispatcher(dispatcher);
+
 
     private static OkHttpClient.Builder httpClientBlockChain = new OkHttpClient.Builder()
             .addInterceptor(new Interceptor() {
@@ -89,23 +113,27 @@ public class ServiceGenerator {
 
     private static Retrofit retrofitYodlee = builderYodlee.client(httpClientYodlee.build()).build();
 
+    private static Retrofit retrofitYodleeCob = builderYodlee.client(httpClientYodleeCob.build()).build();
+
     private static Retrofit retrofitBlockChain = builderBlockChain.client(httpClientBlockChain.build()).build();
 
     /* package */
     static Retrofit getRetrofit() {
-        if (isYodleeUsed)
-            return retrofitYodlee;
-        else return retrofitBlockChain;
+
+        return retrofitYodleeCob;
+
     }
 
     public static <S> S createServiceYodlee(Class<S> retrofitAPI) {
-        isYodleeUsed = true;
+
         return retrofitYodlee.create(retrofitAPI);
     }
 
     public static <S> S createServiceBlockChain(Class<S> retrofitAPI) {
-        isYodleeUsed = false;
         return retrofitBlockChain.create(retrofitAPI);
     }
 
+    public static <S> S createServiceYodleeSetup(Class<S> retrofitAPI) {
+        return retrofitYodleeCob.create(retrofitAPI);
+    }
 }
