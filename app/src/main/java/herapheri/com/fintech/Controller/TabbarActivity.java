@@ -121,17 +121,17 @@ public class TabbarActivity extends FragmentActivity {
             }
             if(i == 1){
                // tabLayout.getTabAt(1).setIcon(R.drawable.settings);
-                tabLayout.getTabAt(1).setText("My Requests");
+                tabLayout.getTabAt(1).setText("Requests");
             }
             if(i == 2){
                 tabLayout.getTabAt(2).setText("Account");
 
             }
-            //if(i == 2){
+            if(i == 3){
             //tabLayout.getTabAt(2).setIcon(R.drawable.accountios2);
-            //  tabLayout.getTabAt(2).setText("Account");
+              tabLayout.getTabAt(3).setText("Lend");
 
-//            }
+            }
             mViewPager.setCurrentItem(0);
         }
     }
@@ -172,6 +172,13 @@ public class TabbarActivity extends FragmentActivity {
                 fragment.setArguments(args);
                 return fragment;
             }
+            else if(i == 3){
+                Fragment fragment = new LenderFragment();
+                Bundle args = new Bundle();
+                // Our object is just an integer :-P
+                fragment.setArguments(args);
+                return fragment;
+            }
 
 
             return null;
@@ -180,7 +187,7 @@ public class TabbarActivity extends FragmentActivity {
 
         @Override
         public int getCount() {
-            return 3;
+            return 4;
         }
 
 
