@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setTitle("Lend It");
 
         next = (Button) findViewById(R.id.btn_login);
         next.setOnClickListener(new View.OnClickListener() {

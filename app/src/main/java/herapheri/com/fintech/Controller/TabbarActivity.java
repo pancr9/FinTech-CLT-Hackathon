@@ -21,13 +21,13 @@ import herapheri.com.fintech.R;
 
 public class TabbarActivity extends AppCompatActivity {
 
-    FragmentManager fragmentManager;
-    private FragmentTabHost tabHost;
     public PagerAdapter pagerAdapter;
     public FragmentManager fm;
     public TabLayout tabLayout;
+    FragmentManager fragmentManager;
     ViewPager mViewPager;
     Toolbar toolbar;
+    private FragmentTabHost tabHost;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,16 +52,10 @@ public class TabbarActivity extends AppCompatActivity {
         setUpTablayout();
         setSupportActionBar(toolbar);
 
-        //rv.setHasFixedSize(true);
-        //LinearLayoutManager llm = new LinearLayoutManager(this);
-        //rv.setLayoutManager(llm);
-
     }
 
 
-
-
-    public void setUpTablayout(){
+    public void setUpTablayout() {
         mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
@@ -97,13 +91,13 @@ public class TabbarActivity extends AppCompatActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 mViewPager.setCurrentItem(tab.getPosition());
-               // if(tab.getPosition() == 0 || tab.getPosition() == 1){
-                    tabLayout.setSelectedTabIndicatorColor(Color.WHITE);
-              //  }
-              //  else{
-                    //tabLayout.setSelectedTabIndicatorColor(Color.TRANSPARENT);
+                // if(tab.getPosition() == 0 || tab.getPosition() == 1){
+                tabLayout.setSelectedTabIndicatorColor(Color.WHITE);
+                //  }
+                //  else{
+                //tabLayout.setSelectedTabIndicatorColor(Color.TRANSPARENT);
 
-              //  }
+                //  }
             }
 
             @Override
@@ -118,84 +112,27 @@ public class TabbarActivity extends AppCompatActivity {
         });
         mViewPager.setAdapter(pagerAdapter);
         tabLayout.setupWithViewPager(mViewPager);
-        tabLayout.setTabTextColors(Color.parseColor("#ffffff"),Color.parseColor("#ffffff"));
-        for (int i = 0; i < tabLayout.getTabCount(); i++){
-            if(i == 0){
+        tabLayout.setTabTextColors(Color.parseColor("#ffffff"), Color.parseColor("#ffffff"));
+        for (int i = 0; i < tabLayout.getTabCount(); i++) {
+            if (i == 0) {
                 //tabLayout.getTabAt(0).setIcon(R.drawable.pin);
                 tabLayout.getTabAt(0).setText("Home");
             }
-            if(i == 1){
-               // tabLayout.getTabAt(1).setIcon(R.drawable.settings);
+            if (i == 1) {
+                // tabLayout.getTabAt(1).setIcon(R.drawable.settings);
                 tabLayout.getTabAt(1).setText("Requests");
             }
-            if(i == 2){
+            if (i == 2) {
                 tabLayout.getTabAt(2).setText("Account");
 
             }
-            if(i == 3){
-            //tabLayout.getTabAt(2).setIcon(R.drawable.accountios2);
-              tabLayout.getTabAt(3).setText("Lend");
+            if (i == 3) {
+                //tabLayout.getTabAt(2).setIcon(R.drawable.accountios2);
+                tabLayout.getTabAt(3).setText("Lend");
 
             }
             mViewPager.setCurrentItem(0);
         }
-    }
-    public class PagerAdapter extends FragmentStatePagerAdapter {
-
-
-        PagerAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        @Override
-        public Fragment getItem(int i) {
-            if(i == 0){
-                //fragment = new YurperFragment();
-                Fragment fragment = new HomeFragment();
-                Bundle args = new Bundle();
-                // Our object is just an integer :-P
-                fragment.setArguments(args);
-                return fragment;
-
-            }
-            if(i == 1){
-             //   Fragment fragment = new SettingsFragment();
-             //   Bundle args = new Bundle();
-                // Our object is just an integeRelativeLayoutr :-P
-               // fragment.setArguments(args);
-               // return fragment;
-                Fragment fragment = new RequestFragment();
-                Bundle args = new Bundle();
-                // Our object is just an integer :-P
-                fragment.setArguments(args);
-                return fragment;
-            }
-            else if(i == 2){
-                Fragment fragment = new AccountFragment();
-                Bundle args = new Bundle();
-                // Our object is just an integer :-P
-                fragment.setArguments(args);
-                return fragment;
-            }
-            else if(i == 3){
-                Fragment fragment = new LenderFragment();
-                Bundle args = new Bundle();
-                // Our object is just an integer :-P
-                fragment.setArguments(args);
-                return fragment;
-            }
-
-
-            return null;
-        }
-
-
-        @Override
-        public int getCount() {
-            return 4;
-        }
-
-
     }
 
     @Override
@@ -220,6 +157,62 @@ public class TabbarActivity extends AppCompatActivity {
         }
 
         return true;
+    }
+
+    public class PagerAdapter extends FragmentStatePagerAdapter {
+
+
+        PagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int i) {
+            if (i == 0) {
+                //fragment = new YurperFragment();
+                Fragment fragment = new HomeFragment();
+                Bundle args = new Bundle();
+                // Our object is just an integer :-P
+                fragment.setArguments(args);
+                return fragment;
+
+            }
+            if (i == 1) {
+                //   Fragment fragment = new SettingsFragment();
+                //   Bundle args = new Bundle();
+                // Our object is just an integeRelativeLayoutr :-P
+                // fragment.setArguments(args);
+                // return fragment;
+                Fragment fragment = new RequestFragment();
+                Bundle args = new Bundle();
+                // Our object is just an integer :-P
+                fragment.setArguments(args);
+                return fragment;
+            } else if (i == 2) {
+                Fragment fragment = new AccountFragment();
+                Bundle args = new Bundle();
+                // Our object is just an integer :-P
+                fragment.setArguments(args);
+                return fragment;
+            } else if (i == 3) {
+                Fragment fragment = new LenderFragment();
+                Bundle args = new Bundle();
+                // Our object is just an integer :-P
+                fragment.setArguments(args);
+                return fragment;
+            }
+
+
+            return null;
+        }
+
+
+        @Override
+        public int getCount() {
+            return 4;
+        }
+
+
     }
 }
 

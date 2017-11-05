@@ -42,13 +42,11 @@ public class HomeFragment extends Fragment {
         items.add(item);
         items.add(item);
         items.add(item);
-        //ArrayAdapter adapter = new ArrayAdapter<String> (this,R.layout.item, items);
-        //CustomArrayAdapter customArrayAdapter = new CustomArrayAdapter(getActivity(),R.layout.item,items);
-        //rv.setAdapter(customArrayAdapter);
+
         rv.setHasFixedSize(true);
-        //RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
-        //gridLayoutManager.set
+
         rv.setLayoutManager(gridLayoutManager);
         CustomArrayAdapter customArrayAdapter = new CustomArrayAdapter(getActivity(), items);
         rv.setAdapter(customArrayAdapter);
@@ -85,13 +83,11 @@ public class HomeFragment extends Fragment {
         return (rad * 180.0 / Math.PI);
     }
 
-
-
-    public class CustomArrayAdapter extends RecyclerView.Adapter<CustomArrayAdapter.CustomViewHolder> {
+    class CustomArrayAdapter extends RecyclerView.Adapter<CustomArrayAdapter.CustomViewHolder> {
         private List<Item> items;
         private Context mContext;
 
-        public CustomArrayAdapter(Context context, List<Item> items) {
+        CustomArrayAdapter(Context context, List<Item> items) {
             this.items = items;
             this.mContext = context;
         }
@@ -113,39 +109,24 @@ public class HomeFragment extends Fragment {
                     item.setModel("Oxford");
                     item.setLenderId("001");
                     item.setManufactureYear(Integer.parseInt("2017"));
-                    //Location l = new Location("provider");
-                    //item.setLocation(l);
                     item.setPricePerday(3.50f);
                     item.setRating(9.8f);
                     item.setTimeRented(Long.parseLong("3333"));
                     item.setTimeReturned(Long.parseLong("4444"));
                     item.setType("A");
                     item.setWeight(200.00f);
-                    //ii.putExtra("name",items.get(i).getName());
-                    //ii.putExtra("cost",items.get(i).getCostPerHour());
-                    //ii.putExtra("desc",items.get(i).getItemDescription());
-                   // ii.putExtra("path",items.get(i).getImgPath());
                     ii.putExtra("item",item);
                     startActivity(ii);
                 }
             });
-            CustomViewHolder viewHolder = new CustomViewHolder(view);
-            return viewHolder;
+
+            return new CustomViewHolder(view);
         }
 
         @Override
         public void onBindViewHolder(CustomViewHolder customViewHolder, int i) {
-            //Item feedItem = feedItemList.get(i);
-
-            //Render image using Picasso library
-//            if (items.get(i).getImgPath() != null && items.get(i).getImgPath().length() > 0) {
-//                Picasso.with(mContext).load(items.get(i).getImgPath())
-//                        .placeholder(R.drawable.ic_action_name)
-//                        .into(customViewHolder.imageView);
-//            }
 
             //Setting text view title
-
             customViewHolder.name.setText(items.get(i).getName());
             customViewHolder.age.setText(items.get(i).getPricePerday()+"$ cost per day");
         }
@@ -160,7 +141,7 @@ public class HomeFragment extends Fragment {
             TextView name;
             TextView age;
 
-            public CustomViewHolder(View view) {
+            CustomViewHolder(View view) {
                 super(view);
                 this.name = (TextView) view.findViewById(R.id.person_name);
                 this.age = (TextView) view.findViewById(R.id.person_age);

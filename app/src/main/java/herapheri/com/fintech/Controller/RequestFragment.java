@@ -28,7 +28,7 @@ public class RequestFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_request,container,false);
+        View v = inflater.inflate(R.layout.fragment_request, container, false);
         ListView rv = (ListView) v.findViewById(R.id.rve);
         ArrayList<Request> items = new ArrayList<>();
         Request item = new Request();
@@ -50,107 +50,102 @@ public class RequestFragment extends Fragment {
     }
 
 
+    class Request {
+        String name;
+        String costPerHour;
+        String status;
 
 
-
-
-        public class Request {
-            String name;
-            String costPerHour;
-            String status;
-
-
-            public String getStatus() {
-                return status;
-            }
-
-            public void setStatus(String status) {
-                this.status = status;
-            }
-
-            public Request() {
-            }
-            public String getName() {
-                return name;
-            }
-
-            public void setName(String name) {
-                this.name = name;
-            }
-
-            public String getCostPerHour() {
-                return costPerHour;
-            }
-
-            public void setCostPerHour(String costPerHour) {
-                this.costPerHour = costPerHour;
-            }
+        Request() {
         }
 
+        String getStatus() {
+            return status;
+        }
 
-        public class CustomRequestAdapter extends ArrayAdapter<Request> {
+        void setStatus(String status) {
+            this.status = status;
+        }
 
-            Context c;
-            int r;
-            List<Request> s;
+        public String getName() {
+            return name;
+        }
 
-            public CustomRequestAdapter(@NonNull Context context, int resource, @NonNull List<Request> objects) {
+        public void setName(String name) {
+            this.name = name;
+        }
 
-                super(context, resource, objects);
-                c = context;
-                r = resource;
-                s = objects;
-            }
+        String getCostPerHour() {
+            return costPerHour;
+        }
 
-            @Override
-            public int getCount() {
-                return super.getCount();
-            }
+        void setCostPerHour(String costPerHour) {
+            this.costPerHour = costPerHour;
+        }
+    }
 
-            @NonNull
-            @Override
-            public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-                LayoutInflater inflater = (LayoutInflater) c
-                        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                convertView = inflater.inflate(r, parent, false);
-                convertView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
+
+    class CustomRequestAdapter extends ArrayAdapter<Request> {
+
+        Context c;
+        int r;
+        List<Request> s;
+
+        CustomRequestAdapter(@NonNull Context context, int resource, @NonNull List<Request> objects) {
+
+            super(context, resource, objects);
+            c = context;
+            r = resource;
+            s = objects;
+        }
+
+        @Override
+        public int getCount() {
+            return super.getCount();
+        }
+
+        @NonNull
+        @Override
+        public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+            LayoutInflater inflater = (LayoutInflater) c
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            convertView = inflater.inflate(r, parent, false);
+            convertView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 //                        Intent i = new Intent(getActivity(), PostActivity.class);
 //                        i.putExtra("name", s.get(position).getName());
 //                        i.putExtra("cost", s.get(position).getCostPerHour());
 //                        i.putExtra("desc", s.get(position).getRequestDescription());
 //                        startActivity(i);
 
-                    }
-                });
+                }
+            });
 
-                TextView name = (TextView) convertView.findViewById(R.id.name_request);
-                TextView status = (TextView) convertView.findViewById(R.id.status_request);
-                TextView cost = (TextView) convertView.findViewById(R.id.cost_request);
-                Button result = (Button) convertView.findViewById(R.id.result);
-                name.setText("Item: "+s.get(position).getName());
-                cost.setText("Cost per day: "+s.get(position).getCostPerHour());
-                status.setText("Status "+s.get(position).getStatus());
-                CardView cardView = (CardView) convertView.findViewById(R.id.cardView);
-                if(s.get(position).getStatus().equals("Approved")){
+            TextView name = (TextView) convertView.findViewById(R.id.name_request);
+            TextView status = (TextView) convertView.findViewById(R.id.status_request);
+            TextView cost = (TextView) convertView.findViewById(R.id.cost_request);
+            Button result = (Button) convertView.findViewById(R.id.result);
+            name.setText("Item: " + s.get(position).getName());
+            cost.setText("Cost per day: " + s.get(position).getCostPerHour());
+            status.setText("Status " + s.get(position).getStatus());
+            CardView cardView = (CardView) convertView.findViewById(R.id.cardView);
+            if (s.get(position).getStatus().equals("Approved")) {
                 //cardView.setCardBackgroundColor(Color.parseColor("#009900"));
-                    result.setBackground(getResources().getDrawable(R.drawable.shape_accepted));
-                }
-                else if(s.get(position).getStatus().equals("Pending")){
-                    //cardView.setCardBackgroundColor(Color.parseColor("#999999"));
-                    result.setBackground(getResources().getDrawable(R.drawable.shape_pending));
+                result.setBackground(getResources().getDrawable(R.drawable.shape_accepted));
+            } else if (s.get(position).getStatus().equals("Pending")) {
+                //cardView.setCardBackgroundColor(Color.parseColor("#999999"));
+                result.setBackground(getResources().getDrawable(R.drawable.shape_pending));
 
-                }
-                else if(s.get(position).getStatus().equals("Declined")){
-                    //cardView.setCardBackgroundColor(Color.parseColor("#FF0000"));
-                    result.setBackground(getResources().getDrawable(R.drawable.shape_declined));
+            } else if (s.get(position).getStatus().equals("Declined")) {
+                //cardView.setCardBackgroundColor(Color.parseColor("#FF0000"));
+                result.setBackground(getResources().getDrawable(R.drawable.shape_declined));
 
 
-                }
-                return convertView;
             }
-            }
+            return convertView;
         }
+    }
+}
 
 
