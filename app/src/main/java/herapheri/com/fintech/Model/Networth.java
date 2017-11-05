@@ -11,61 +11,38 @@ import com.google.gson.annotations.SerializedName;
 public class Networth {
     @SerializedName("asset")
     @Expose
-    private String asset;
-
-    @SerializedName("date")
-    @Expose
-    private String date;
+    private Money asset;
 
     @SerializedName("networth")
     @Expose
-    private String networth;
+    private Money networth;
 
     @SerializedName("liability")
     @Expose
-    private String liability;
+    private Money liability;
 
-    @SerializedName("historicalBalances")
-    @Expose
-    private String historicalBalances;
 
-    public String getAsset() {
+    public Money getAsset() {
         return asset;
     }
 
-    public void setAsset(String asset) {
+    public void setAsset(Money asset) {
         this.asset = asset;
     }
 
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public String getNetworth() {
+    public Money getNetworth() {
         return networth;
     }
 
-    public void setNetworth(String networth) {
+    public void setNetworth(Money networth) {
         this.networth = networth;
     }
 
-    public String getLiability() {
+    public Money getLiability() {
         return liability;
     }
 
-    public void setLiability(String liability) {
+    public void setLiability(Money liability) {
         this.liability = liability;
-    }
-
-    public String getHistoricalBalances() {
-        return historicalBalances;
-    }
-
-    public void setHistoricalBalances(String historicalBalances) {
-        this.historicalBalances = historicalBalances;
     }
 }
