@@ -5,14 +5,14 @@ import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by Rekhansh on 11/4/2017.
- * Model for a transaction.
+ * Model for a transaction from Block Chain.
  */
 
 public class Transaction {
 
-    @SerializedName("transactionId")
+    @SerializedName("id")
     @Expose
-    private String transactionId;
+    private Long id;
 
     @SerializedName("renterId")
     @Expose
@@ -42,9 +42,15 @@ public class Transaction {
     @Expose
     private String afterImageURL;
 
+    //From Yodley.
+    @SerializedName("price")
+    @Expose
+    private Money price;
+
+    //From Block-chain.
     @SerializedName("transactionCost")
     @Expose
-    private Double transactionCost;
+    private String transactionCost;
 
     @SerializedName("isLeaseBroken")
     @Expose
@@ -57,12 +63,31 @@ public class Transaction {
     @Expose
     private Float extraCost;
 
-    public String getTransactionId() {
-        return transactionId;
+    //Use when you get data from yodley.
+    public void updatePriceYodleyToBlockChain() {
+        this.price.setAmount(String.valueOf(this.transactionCost));
+        this.price.setCurrency("USD");
     }
 
-    public void setTransactionId(String transactionId) {
-        this.transactionId = transactionId;
+    //Use when you get data from block chain.
+    public void updatePriceBlockChainToYodley() {
+        this.setTransactionCost(this.getPrice().getAmount());
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Money getPrice() {
+        return price;
+    }
+
+    public void setPrice(Money price) {
+        this.price = price;
     }
 
     public String getRenterId() {
@@ -121,11 +146,11 @@ public class Transaction {
         this.afterImageURL = afterImageURL;
     }
 
-    public Double getTransactionCost() {
+    public String getTransactionCost() {
         return transactionCost;
     }
 
-    public void setTransactionCost(Double transactionCost) {
+    public void setTransactionCost(String transactionCost) {
         this.transactionCost = transactionCost;
     }
 
