@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:flatui="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:orientation="vertical"
+        flatui:layout_constraintBottom_toTopOf="@+id/button"
+        flatui:layout_constraintEnd_toEndOf="parent"
+        flatui:layout_constraintStart_toStartOf="parent"
+        flatui:layout_constraintTop_toTopOf="parent">
+
+
+        <EditText
+            android:id="@+id/searchBox"
+            android:layout_width="fill_parent"
+            android:layout_height="45dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/et_bkh"
+            android:hint="Change Phone Number"
+            android:inputType="textVisiblePassword"
+            android:paddingLeft="10dp"
+            android:textColorHint="#000000">
+
+        </EditText>
+
+        <EditText
+            android:id="@+id/searchBox2"
+            android:layout_width="fill_parent"
+            android:layout_height="45dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/et_bkh"
+            android:hint="Change Cell Phone"
+            android:inputType="textVisiblePassword"
+            android:paddingLeft="10dp"
+            android:textColorHint="#000000"
+            tools:layout_editor_absoluteX="0dp"
+
+            tools:layout_editor_absoluteY="45dp">
+
+        </EditText>
+
+        <EditText
+            android:id="@+id/searchBox3"
+            android:layout_width="fill_parent"
+            android:layout_height="45dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/et_bkh"
+            android:hint="Change Location"
+            android:inputType="textVisiblePassword"
+            android:paddingLeft="10dp"
+            android:textColorHint="#000000"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="90dp">
+
+        </EditText>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="140dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/shape_drawable"
+        android:text="Submit Changes"
+
+        android:textAllCaps="true"
+        android:textColor="#ffffff"
+        flatui:layout_constraintBottom_toTopOf="@+id/info"
+        flatui:layout_constraintEnd_toEndOf="@+id/info"
+        flatui:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <ListView
+        android:id="@+id/info"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:divider="@null"
+        android:dividerHeight="0dp"
+        android:layout_marginStart="8dp"
+        flatui:layout_constraintBottom_toBottomOf="parent"
+        flatui:layout_constraintEnd_toEndOf="parent"
+        flatui:layout_constraintStart_toStartOf="parent"
+        flatui:layout_constraintTop_toBottomOf="@+id/button" />
+</android.support.constraint.ConstraintLayout>
