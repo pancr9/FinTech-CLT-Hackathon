@@ -16,12 +16,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import herapheri.com.fintech.Model.Address;
 import herapheri.com.fintech.Model.EntityAccessTokens;
 import herapheri.com.fintech.Model.EntityPrefrences;
 import herapheri.com.fintech.Model.EntitySession;
 import herapheri.com.fintech.Model.Money;
 import herapheri.com.fintech.Model.Name;
 import herapheri.com.fintech.Model.Networth;
+import herapheri.com.fintech.Model.User;
 import herapheri.com.fintech.R;
 
 /**
@@ -41,49 +43,52 @@ public class AccountFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_account,container,false);
+        View v = inflater.inflate(R.layout.fragment_account, container, false);
         list = (ListView) v.findViewById(R.id.info);
         users = new ArrayList<>();
+
+
         User u = new User();
-        u.setAddress("Woodward Hall");
+        u.setAddress(new Address("Woodward Hall", "UNC Charlotte", null, null, null));
         u.setEmail("6amigos.com");
         u.setId(0);
-        u.setName("The 6 Amigos");
-        u.setLongName("The 6 amigos Long Name");
+        u.setName(new Name("The 6", "Amigos"));
+        u.setLoginName("The 6 amigos Log Name");
         EntityAccessTokens entityAccessTokens = new EntityAccessTokens();
         entityAccessTokens.setAppId("0DAFASNJDA000");
         entityAccessTokens.setUrl("https://www.6amingos.com");
         entityAccessTokens.setValue("3.50$");
         EntitySession session = new EntitySession();
         session.setUserSession("0001123");
-        EntityPrefrences prefrences = new EntityPrefrences();
-        prefrences.setCurrency("USD");
-        prefrences.setDateFormat("MM/dd/YYYY");
-        prefrences.setLocale("PM");
-        prefrences.setTimeZone("East");
+        EntityPrefrences preferences = new EntityPrefrences();
+        preferences.setCurrency("USD");
+        preferences.setDateFormat("MM/dd/YYYY");
+        preferences.setLocale("PM");
+        preferences.setTimeZone("East");
+
+
         //u.setEntityAccessTokens();
         //for(int i =0; i <10; i++){
-            users.add("Email : "+u.getEmail());
-            users.add("Long name : "+u.getLongName());
-            users.add("Address : "+u.getAddress());
-            users.add("Valid until : "+u.getValidUntil());
-            users.add("User ID : "+u.getId()+"");
-            users.add("App ID : "+entityAccessTokens.getAppId());
-            users.add("URL : "+entityAccessTokens.getUrl());
-            users.add("Value : "+entityAccessTokens.getValue());
-            users.add("Currency : "+prefrences.getCurrency());
-            users.add("Locale : "+prefrences.getLocale());
-            users.add("DateFormat : "+prefrences.getDateFormat());
-            users.add("Time Zone : "+prefrences.getTimeZone());
-            users.add("User Session : "+session.getUserSession());
-            CustomRequestAdapter customRequestAdapter = new CustomRequestAdapter(getActivity(),R.layout.fragment_account_item,users);
-            list.setAdapter(customRequestAdapter);
+        users.add("Email : " + u.getEmail());
+        users.add("Long name : " + u.getLoginName());
+        users.add("Address : " + u.getAddress());
+        users.add("User ID : " + u.getId() + "");
+        users.add("App ID : " + entityAccessTokens.getAppId());
+        users.add("URL : " + entityAccessTokens.getUrl());
+        users.add("Value : " + entityAccessTokens.getValue());
+        users.add("Currency : " + preferences.getCurrency());
+        users.add("Locale : " + preferences.getLocale());
+        users.add("DateFormat : " + preferences.getDateFormat());
+        users.add("Time Zone : " + preferences.getTimeZone());
+        users.add("User Session : " + session.getUserSession());
+        CustomRequestAdapter customRequestAdapter = new CustomRequestAdapter(getActivity(), R.layout.fragment_account_item, users);
+        list.setAdapter(customRequestAdapter);
         fname = (TextView) v.findViewById(R.id.fname);
         networth_tv = (TextView) v.findViewById(R.id.networth);
         liability_tv = (TextView) v.findViewById(R.id.liability);
         assets_tv = (TextView) v.findViewById(R.id.assets);
         networth = new Networth();
-        Name name = new Name();
+        Name name = new Name("John", "Doe");
         Money m = new Money();
         m.setAmount("450,000.00$");
         m.setCurrency("USD");
@@ -102,21 +107,22 @@ public class AccountFragment extends Fragment {
         name.setLast("Salad");
         name.setFullName("Mohamed Salad");
         fname.setText(name.getFullName());
-        networth_tv.setText("Networth : "+networth.getNetworth().getAmount()+" "+networth.getNetworth().getCurrency());
-        assets_tv.setText("Assets : "+networth.getAsset().getAmount()+" "+networth.getAsset().getCurrency());
-        liability_tv.setText("Liability : "+networth.getLiability().getAmount()+" "+networth.getLiability().getCurrency());
+        networth_tv.setText("Networth : " + networth.getNetworth().getAmount() + " " + networth.getNetworth().getCurrency());
+        assets_tv.setText("Assets : " + networth.getAsset().getAmount() + " " + networth.getAsset().getCurrency());
+        liability_tv.setText("Liability : " + networth.getLiability().getAmount() + " " + networth.getLiability().getCurrency());
 
         // }
         return v;
     }
 
+/*
     public class User {
         long id;
         String longName;
         String email;
         String name;
         String address;
-        EntityPrefrences entityPrefrences;
+        Entitypreferences entitypreferences;
         EntitySession entitySession;
         EntityAccessTokens entityAccessTokens;
         String validUntil;
@@ -162,12 +168,12 @@ public class AccountFragment extends Fragment {
             this.address = address;
         }
 
-        public EntityPrefrences getEntityPrefrences() {
-            return entityPrefrences;
+        public Entitypreferences getEntitypreferences() {
+            return entitypreferences;
         }
 
-        public void setEntityPrefrences(EntityPrefrences entityPrefrences) {
-            this.entityPrefrences = entityPrefrences;
+        public void setEntitypreferences(Entitypreferences entitypreferences) {
+            this.entitypreferences = entitypreferences;
         }
 
         public EntitySession getEntitySession() {
@@ -194,6 +200,7 @@ public class AccountFragment extends Fragment {
             this.validUntil = validUntil;
         }
     }
+*/
 
 
     public class CustomRequestAdapter extends ArrayAdapter<String> {

@@ -13,14 +13,18 @@ public class Name {
     @SerializedName("first")
     @Expose
     private String first;
-
     @SerializedName("last")
     @Expose
     private String last;
-
     @SerializedName("fullName")
     @Expose
     private String fullName;
+
+    public Name(String first, String last) {
+        this.first = first;
+        this.last = last;
+        this.fullName = first + " " + last;
+    }
 
     public String getFirst() {
         return first;

@@ -10,6 +10,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.afollestad.materialdialogs.MaterialDialog;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -38,6 +40,7 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity {
     Button next;
     MediaType mediaType = MediaType.parse("application/json");
+    private MaterialDialog materialDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +52,14 @@ public class MainActivity extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                materialDialog = new MaterialDialog.Builder(MainActivity.this)
+                        .title("Logging in...")
+                        .content("Please wait")
+                        .progress(true, 0)
+                        .progressIndeterminateStyle(true)
+                        .cancelable(false)
+                        .show();
 
                 //Pre-configured for easy login of user. For Demo purposes only.
                 String cobrandLogin = getString(R.string.Cobrand_Login);
@@ -77,8 +88,11 @@ public class MainActivity extends AppCompatActivity {
                             //Set cob-session.
                             SessionGlobals.setCobSession(cobrand.getSession().getCobSession());
                             callUserLogin();
-                        } else
+                        } else {
                             displayError(response);
+                            materialDialog.dismiss();
+                        }
+
                     }
 
                     @Override
@@ -129,12 +143,16 @@ public class MainActivity extends AppCompatActivity {
                     if (SessionGlobals.getUserSession() != null && SessionGlobals.getCobSession() != null)
                         checkAccountDetails();
 
-                } else displayError(response);
+                } else {
+                    materialDialog.dismiss();
+                    displayError(response);
+                }
             }
 
             @Override
             public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
                 Log.d("Response User ", "Failed");
+                materialDialog.dismiss();
             }
         });
     }
@@ -177,11 +195,15 @@ public class MainActivity extends AppCompatActivity {
 
                     //Write a logic to count all balances of the person.
                     Log.d("Account Balance is", SessionGlobals.getTotalBalance() + "");
+                    materialDialog.dismiss();
 
                     Intent i = new Intent(MainActivity.this, TabbarActivity.class);
                     startActivity(i);
 
-                } else displayError(response);
+                } else {
+                    materialDialog.dismiss();
+                    displayError(response);
+                }
             }
 
             @Override

@@ -9,25 +9,30 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class Address {
+
     @SerializedName("address1")
     @Expose
     private String address1;
-
     @SerializedName("address2")
     @Expose
     private String address2;
-
     @SerializedName("state")
     @Expose
     private String state;
-
     @SerializedName("city")
     @Expose
     private String city;
-
     @SerializedName("zip")
     @Expose
     private String zip;
+
+    public Address(String address1, String address2, String state, String city, String zip) {
+        this.address1 = address1;
+        this.address2 = address2;
+        this.state = state;
+        this.city = city;
+        this.zip = zip;
+    }
 
     public String getAddress1() {
         return address1;
