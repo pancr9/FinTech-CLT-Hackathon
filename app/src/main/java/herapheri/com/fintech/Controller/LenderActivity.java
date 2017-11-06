@@ -49,8 +49,6 @@ public class LenderActivity extends AppCompatActivity {
         item.setModel("Oxford");
         item.setLenderId("001");
         item.setManufactureYear(Integer.parseInt("2017"));
-        //Location l = new Location("provider");
-        //item.setLocation(l);
         item.setPricePerday(3.50f);
         item.setRating(9.8f);
         item.setTimeRented(Long.parseLong("3333"));
@@ -91,17 +89,10 @@ public class LenderActivity extends AppCompatActivity {
                 convertView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        //Intent i = new Intent(getActivity(),PostActivity.class);
-                        //i.putExtra("name",s.get(position).getName());
-                        //i.putExtra("cost",s.get(position).getCostPerHour());
-                        //i.putExtra("desc",s.get(position).getItemDescription());
-                       // startActivity(i);
 
                     }
                 });
                 TextView et = (TextView) convertView.findViewById(R.id.lender_et);
-
-
 
                 return convertView;
             }

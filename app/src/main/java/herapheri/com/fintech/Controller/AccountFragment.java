@@ -115,101 +115,13 @@ public class AccountFragment extends Fragment {
         return v;
     }
 
-/*
-    public class User {
-        long id;
-        String longName;
-        String email;
-        String name;
-        String address;
-        Entitypreferences entitypreferences;
-        EntitySession entitySession;
-        EntityAccessTokens entityAccessTokens;
-        String validUntil;
-
-
-        public long getId() {
-            return id;
-        }
-
-        public void setId(long id) {
-            this.id = id;
-        }
-
-        public String getLongName() {
-            return longName;
-        }
-
-        public void setLongName(String longName) {
-            this.longName = longName;
-        }
-
-        public String getEmail() {
-            return email;
-        }
-
-        public void setEmail(String email) {
-            this.email = email;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public String getAddress() {
-            return address;
-        }
-
-        public void setAddress(String address) {
-            this.address = address;
-        }
-
-        public Entitypreferences getEntitypreferences() {
-            return entitypreferences;
-        }
-
-        public void setEntitypreferences(Entitypreferences entitypreferences) {
-            this.entitypreferences = entitypreferences;
-        }
-
-        public EntitySession getEntitySession() {
-            return entitySession;
-        }
-
-        public void setEntitySession(EntitySession entitySession) {
-            this.entitySession = entitySession;
-        }
-
-        public EntityAccessTokens getEntityAccessTokens() {
-            return entityAccessTokens;
-        }
-
-        public void setEntityAccessTokens(EntityAccessTokens entityAccessTokens) {
-            this.entityAccessTokens = entityAccessTokens;
-        }
-
-        public String getValidUntil() {
-            return validUntil;
-        }
-
-        public void setValidUntil(String validUntil) {
-            this.validUntil = validUntil;
-        }
-    }
-*/
-
-
-    public class CustomRequestAdapter extends ArrayAdapter<String> {
+    private class CustomRequestAdapter extends ArrayAdapter<String> {
 
         Context c;
         int r;
         List<String> s;
 
-        public CustomRequestAdapter(@NonNull Context context, int resource, @NonNull List<String> objects) {
+        CustomRequestAdapter(@NonNull Context context, int resource, @NonNull List<String> objects) {
 
             super(context, resource, objects);
             c = context;
@@ -231,15 +143,9 @@ public class AccountFragment extends Fragment {
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                        Intent i = new Intent(getActivity(), PostActivity.class);
-//                        i.putExtra("name", s.get(position).getName());
-//                        i.putExtra("cost", s.get(position).getCostPerHour());
-//                        i.putExtra("desc", s.get(position).getRequestDescription());
-//                        startActivity(i);
 
                 }
             });
-
 
             TextView name = (TextView) convertView.findViewById(R.id.account_item);
             name.setText(s.get(position));

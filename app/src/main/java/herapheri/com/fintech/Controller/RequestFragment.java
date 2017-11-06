@@ -39,11 +39,8 @@ public class RequestFragment extends Fragment {
         items.add(item);
         items.add(item);
         items.add(item);
-        //item.setStatus("Declined");
         items.add(item);
-        //item.setStatus("Pending");
         items.add(item);
-        //ArrayAdapter adapter = new ArrayAdapter<String> (this,R.layout.item, items);
         CustomRequestAdapter customArrayAdapter = new CustomRequestAdapter(getActivity(), R.layout.request, items);
         rv.setAdapter(customArrayAdapter);
         return v;
@@ -85,7 +82,7 @@ public class RequestFragment extends Fragment {
     }
 
 
-    class CustomRequestAdapter extends ArrayAdapter<Request> {
+    private class CustomRequestAdapter extends ArrayAdapter<Request> {
 
         Context c;
         int r;
@@ -113,11 +110,6 @@ public class RequestFragment extends Fragment {
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                        Intent i = new Intent(getActivity(), PostActivity.class);
-//                        i.putExtra("name", s.get(position).getName());
-//                        i.putExtra("cost", s.get(position).getCostPerHour());
-//                        i.putExtra("desc", s.get(position).getRequestDescription());
-//                        startActivity(i);
 
                 }
             });
@@ -129,19 +121,17 @@ public class RequestFragment extends Fragment {
             name.setText("Item: " + s.get(position).getName());
             cost.setText("Cost per day: " + s.get(position).getCostPerHour());
             status.setText("Status " + s.get(position).getStatus());
+
             CardView cardView = (CardView) convertView.findViewById(R.id.cardView);
             if (s.get(position).getStatus().equals("Approved")) {
-                //cardView.setCardBackgroundColor(Color.parseColor("#009900"));
                 result.setBackground(getResources().getDrawable(R.drawable.shape_accepted));
             } else if (s.get(position).getStatus().equals("Pending")) {
-                //cardView.setCardBackgroundColor(Color.parseColor("#999999"));
+
                 result.setBackground(getResources().getDrawable(R.drawable.shape_pending));
 
             } else if (s.get(position).getStatus().equals("Declined")) {
-                //cardView.setCardBackgroundColor(Color.parseColor("#FF0000"));
+
                 result.setBackground(getResources().getDrawable(R.drawable.shape_declined));
-
-
             }
             return convertView;
         }

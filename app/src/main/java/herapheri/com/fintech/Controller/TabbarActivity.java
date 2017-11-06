@@ -7,7 +7,6 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.app.FragmentTabHost;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -22,12 +21,10 @@ import herapheri.com.fintech.R;
 public class TabbarActivity extends AppCompatActivity {
 
     public PagerAdapter pagerAdapter;
-    public FragmentManager fm;
     public TabLayout tabLayout;
-    FragmentManager fragmentManager;
     ViewPager mViewPager;
     Toolbar toolbar;
-    private FragmentTabHost tabHost;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,14 +38,7 @@ public class TabbarActivity extends AppCompatActivity {
                 fragmentManager);
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("6 Amingos");
-        //navigationView = (NavigationView) findViewById(R.id.nav_view);
-        //drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-//        tabHost = (FragmentTabHost) findViewById(R.id.tabs_host);
-//        tabHost.setup(this,fragmentManager,android.R.id.tabcontent);
-//        LocalFragment localFragment = new LocalFragment();
-//        tabHost.addTab(tabHost.newTabSpec("Same Room").setIndicator("Same Room"),LocalFragment.class,null);
-//        tabHost.addTab(tabHost.newTabSpec("Settings").setIndicator("Settings"),SettingsFragment.class,null);
+        toolbar.setTitle("Lend It");
         setUpTablayout();
         setSupportActionBar(toolbar);
 
@@ -62,19 +52,6 @@ public class TabbarActivity extends AppCompatActivity {
                 final InputMethodManager imm = (InputMethodManager) getSystemService(
                         Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(mViewPager.getWindowToken(), 0);
-
-
-//                if(mAuth.getCurrentUser() == null && position != 1){
-//                    Toast.makeText(getApplicationContext(),"Please login or register to use other features",Toast.LENGTH_LONG).show();
-//                    Intent i = new Intent(MainActivity.this, LoginActivity.class);
-//                    startActivity(i);
-//                }if(position == 2){
-//
-//                    //settingsActivity.
-//                }
-//                else {
-//                    //cameraBtn.setVisibility(View.GONE);
-//                }
 
             }
 
@@ -91,13 +68,7 @@ public class TabbarActivity extends AppCompatActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 mViewPager.setCurrentItem(tab.getPosition());
-                // if(tab.getPosition() == 0 || tab.getPosition() == 1){
                 tabLayout.setSelectedTabIndicatorColor(Color.WHITE);
-                //  }
-                //  else{
-                //tabLayout.setSelectedTabIndicatorColor(Color.TRANSPARENT);
-
-                //  }
             }
 
             @Override
@@ -160,7 +131,7 @@ public class TabbarActivity extends AppCompatActivity {
         return true;
     }
 
-    public class PagerAdapter extends FragmentStatePagerAdapter {
+    private class PagerAdapter extends FragmentStatePagerAdapter {
 
 
         PagerAdapter(FragmentManager fm) {
@@ -179,11 +150,7 @@ public class TabbarActivity extends AppCompatActivity {
 
             }
             if (i == 1) {
-                //   Fragment fragment = new SettingsFragment();
-                //   Bundle args = new Bundle();
-                // Our object is just an integeRelativeLayoutr :-P
-                // fragment.setArguments(args);
-                // return fragment;
+
                 Fragment fragment = new RequestFragment();
                 Bundle args = new Bundle();
                 // Our object is just an integer :-P
@@ -202,8 +169,6 @@ public class TabbarActivity extends AppCompatActivity {
                 fragment.setArguments(args);
                 return fragment;
             }
-
-
             return null;
         }
 

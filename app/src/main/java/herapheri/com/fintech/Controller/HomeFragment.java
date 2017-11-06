@@ -42,7 +42,6 @@ public class HomeFragment extends Fragment {
         item = new Item();
         item.setPricePerday(3.05F);
         item.setName("Tractor Trailer");
-        //item.setLocation();
 
         items.add(item);
         items.add(item);
@@ -50,7 +49,6 @@ public class HomeFragment extends Fragment {
         items.add(item);
         items.add(item);
         items.add(item);
-        //fetchAllItems();
         rv.setHasFixedSize(true);
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
@@ -81,8 +79,6 @@ public class HomeFragment extends Fragment {
 
             }
         });
-
-
     }
 
     public Double getDistanceBetweenPoints() {
@@ -181,51 +177,4 @@ public class HomeFragment extends Fragment {
             }
         }
     }
-
-//    public class CustomArrayAdapter extends RecyclerView.Adapter<ItemViewHolder> {
-//
-//        Context c;
-//        int r;
-//        List<Item> s;
-//        public CustomArrayAdapter(@NonNull Context context, int resource, @NonNull List<Item> objects) {
-//
-//            super(context, resource, objects);
-//            c = context;
-//            r = resource;
-//            s = objects;
-//        }
-//
-//        @Override
-//        public int getCount() {
-//            return super.getCount();
-//        }
-//
-//        @NonNull
-//        @Override
-//        public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-//            LayoutInflater inflater = (LayoutInflater) c
-//                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//            convertView = inflater.inflate(r,parent,false);
-//            convertView.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    Intent i = new Intent(getActivity(),PostActivity.class);
-//                    i.putExtra("name",s.get(position).getName());
-//                    i.putExtra("cost",s.get(position).getCostPerHour());
-//                    i.putExtra("desc",s.get(position).getItemDescription());
-//                    startActivity(i);
-//
-//                }
-//            });
-//            TextView name = (TextView) convertView.findViewById(R.id.person_name);
-//            TextView age = (TextView) convertView.findViewById(R.id.person_age);
-//            name.setText(s.get(position).getName());
-//            age.setText(s.get(position).getCostPerHour());
-//
-//
-//            return convertView;
-//        }
-//    }
-
-
 }

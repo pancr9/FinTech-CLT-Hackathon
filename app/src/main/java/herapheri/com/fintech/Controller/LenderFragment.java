@@ -62,83 +62,26 @@ import herapheri.com.fintech.R;
  */
 
 public class LenderFragment extends Fragment {
-    public String imagePath = "";
     private static final String TAG = "CameraFragment";
-    private Button takePictureButton;
-    private TextureView textureView;
     private static final SparseIntArray ORIENTATIONS = new SparseIntArray();
+    private static final int REQUEST_CAMERA_PERMISSION = 200;
+
     static {
         ORIENTATIONS.append(Surface.ROTATION_0, 90);
         ORIENTATIONS.append(Surface.ROTATION_90, 0);
         ORIENTATIONS.append(Surface.ROTATION_180, 270);
         ORIENTATIONS.append(Surface.ROTATION_270, 180);
     }
-    private String cameraId;
+
+    public String imagePath = "";
     protected CameraDevice cameraDevice;
     protected CameraCaptureSession cameraCaptureSessions;
     protected CaptureRequest captureRequest;
     protected CaptureRequest.Builder captureRequestBuilder;
+    private Button takePictureButton;
+    private TextureView textureView;
+    private String cameraId;
     private Size imageDimension;
-    //private Size imageDimension;
-    private ImageReader imageReader;
-    private File file;
-    private static final int REQUEST_CAMERA_PERMISSION = 200;
-    private boolean mFlashSupported;
-    private Handler mBackgroundHandler;
-    private HandlerThread mBackgroundThread;
-    private boolean mSurfaceTextureAvailable;
-    private boolean mPermissionsGranted;
-    private boolean mCameraOpened;
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_lender,container,false);
-        Log.d("stages","OnCreateView called");
-        textureView = (TextureView) v.findViewById(R.id.texture);
-        assert textureView != null;
-        checkPermission();
-        requestPermission();
-        getPermissions();
-
-        textureView.setSurfaceTextureListener(textureListener);
-        takePictureButton = (Button) v.findViewById(R.id.camera_btn);
-        assert takePictureButton != null;
-        takePictureButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                takePicture();
-            }
-        });
-        try {
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-        //initCamera();
-        return v;
-    }
-
-    protected boolean checkPermission() {
-        int result = ContextCompat.checkSelfPermission(getActivity(), android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        if (result == PackageManager.PERMISSION_GRANTED) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    protected void requestPermission() {
-
-        if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), android.Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-            Toast.makeText(getActivity(), "Write External Storage permission allows us to do store images. Please allow this permission in App Settings.", Toast.LENGTH_LONG).show();
-        } else {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                requestPermissions(new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 100);
-            }
-        }
-    }
-
-
     TextureView.SurfaceTextureListener textureListener = new TextureView.SurfaceTextureListener() {
         @Override
         public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
@@ -148,9 +91,7 @@ public class LenderFragment extends Fragment {
                 ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
                 openCamera();
                 return;
-            }else {
-               // mPermissionsGranted = true;
-
+            } else {
                 // Execute some code after 500 milliseconds have passed
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
@@ -159,8 +100,6 @@ public class LenderFragment extends Fragment {
                         openCamera();
                     }
                 }, 500);
-
-
             }
         }
 
@@ -178,6 +117,11 @@ public class LenderFragment extends Fragment {
         public void onSurfaceTextureUpdated(SurfaceTexture surface) {
         }
     };
+    //private Size imageDimension;
+    private ImageReader imageReader;
+    private File file;
+    private boolean mFlashSupported;
+    private Handler mBackgroundHandler;
     private final CameraDevice.StateCallback stateCallback = new CameraDevice.StateCallback() {
         @Override
         public void onOpened(CameraDevice camera) {
@@ -206,6 +150,54 @@ public class LenderFragment extends Fragment {
             createCameraPreview();
         }
     };
+    private HandlerThread mBackgroundThread;
+    private boolean mSurfaceTextureAvailable;
+    private boolean mPermissionsGranted;
+    private boolean mCameraOpened;
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.fragment_lender, container, false);
+        Log.d("stages", "OnCreateView called");
+        textureView = (TextureView) v.findViewById(R.id.texture);
+        assert textureView != null;
+        checkPermission();
+        requestPermission();
+        getPermissions();
+
+        textureView.setSurfaceTextureListener(textureListener);
+        takePictureButton = (Button) v.findViewById(R.id.camera_btn);
+        assert takePictureButton != null;
+        takePictureButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                takePicture();
+            }
+        });
+        try {
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //initCamera();
+        return v;
+    }
+
+    protected boolean checkPermission() {
+        int result = ContextCompat.checkSelfPermission(getActivity(), android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        return (result == PackageManager.PERMISSION_GRANTED);
+    }
+
+    protected void requestPermission() {
+
+        if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), android.Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            Toast.makeText(getActivity(), "Write External Storage permission allows us to do store images. Please allow this permission in App Settings.", Toast.LENGTH_LONG).show();
+        } else {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                requestPermissions(new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 100);
+            }
+        }
+    }
 
     protected void startBackgroundThread() {
         mBackgroundThread = new HandlerThread("Camera Background");
@@ -302,7 +294,7 @@ public class LenderFragment extends Fragment {
                     try {
                         FileOutputStream out = new FileOutputStream(imagePath);
                         bmp.compress(Bitmap.CompressFormat.PNG, 100, out); //100-best quality
-                        showImage.setBackground(new BitmapDrawable(getResources(),bmp));
+                        showImage.setBackground(new BitmapDrawable(getResources(), bmp));
                         showImage.getLayoutParams().height = 128;
                         showImage.getLayoutParams().width = 96;
                         showImage.requestLayout();
@@ -314,17 +306,15 @@ public class LenderFragment extends Fragment {
                     showImage.setBackground(Drawable.createFromPath(imagePath));
                     ImageDialog.setView(showImage);
 
-                    ImageDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener()
-                    {
-                        public void onClick(DialogInterface arg0, int arg1)
-                        {
+                    ImageDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface arg0, int arg1) {
 
                         }
                     });
                     ImageDialog.setPositiveButton("Lend!", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                           // Intent i = new Intent(getActivity(),LenderActivity.class);
+                            // Intent i = new Intent(getActivity(),LenderActivity.class);
                             //i.putExtra("path",file);
                             //startActivity(i);
                         }
@@ -405,7 +395,6 @@ public class LenderFragment extends Fragment {
     }
 
 
-
     protected void updatePreview() {
         if (null == cameraDevice) {
             Log.e(TAG, "updatePreview error, return");
@@ -462,7 +451,7 @@ public class LenderFragment extends Fragment {
         stopBackgroundThread();
     }
 
-    public void getPermissions(){
+    public void getPermissions() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (getActivity().checkSelfPermission(android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
                 requestPermissions(new String[]{android.Manifest.permission.CAMERA}, 1);
@@ -476,7 +465,6 @@ public class LenderFragment extends Fragment {
             }
         }
     }
-
 
 
 }
