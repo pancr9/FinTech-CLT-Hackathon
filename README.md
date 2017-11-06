@@ -2,7 +2,7 @@
 
 https://hi.uncc.edu/events/carolina-fintech-student-hackathon
 
-![](https://github.com/pancr9/FinTech-CLT-Hackathon/logo.jpg "")
+<img src="https://github.com/pancr9/FinTech-CLT-Hackathon/logo.jpg"/> 
 
 A item lending mobile application is developed for a Carolina Fin Tech Hackathon.
 
