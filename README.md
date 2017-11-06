@@ -2,6 +2,8 @@
 
 https://hi.uncc.edu/events/carolina-fintech-student-hackathon
 
+![](https://github.com/pancr9/FinTech-CLT-Hackathon/logo.jpg "")
+
 A item lending mobile application is developed for a Carolina Fin Tech Hackathon.
 
 The idea behind the application caters to bring the floating money in the market to the banks.
